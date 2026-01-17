@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.cdnfonts.com/css/gelica');
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600&display=swap');
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -8,8 +9,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-syne);
-  --font-serif: var(--font-instrument);
+  --font-sans: var(--font-gelica);
+  --font-body: var(--font-epilogue);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -50,8 +51,8 @@
 }
 
 :root {
-  --font-syne: 'Syne', sans-serif;
-  --font-instrument: 'Instrument Serif', serif;
+  --font-gelica: 'Gelica', sans-serif;
+  --font-epilogue: 'Epilogue', sans-serif;
   --radius: 0.75rem;
   --background: #FAFAF8;
   --foreground: #1A1A1A;
@@ -95,7 +96,10 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-syne);
+    font-family: var(--font-epilogue);
+  }
+  h1, h2, h3, h4, h5, h6, button, .font-display {
+    font-family: var(--font-gelica);
   }
 }
 
@@ -163,11 +167,6 @@
   70% { transform: translate(0%, 15%); }
   80% { transform: translate(3%, 35%); }
   90% { transform: translate(-10%, 10%); }
-}
-
-@keyframes counter {
-  0% { --num: 0; }
-  100% { --num: 150; }
 }
 
 .text-reveal {

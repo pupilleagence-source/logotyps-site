@@ -132,13 +132,15 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
 function Scene({ mousePosition }: { mousePosition: { x: number; y: number } }) {
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[10, 10, 5]} intensity={1.2} />
-      <directionalLight position={[-10, -10, -5]} intensity={0.4} />
-      <directionalLight position={[0, 10, 10]} intensity={0.8} color="#ffffff" />
-      <pointLight position={[5, 5, 10]} intensity={0.6} color="#FF6B35" />
-      <pointLight position={[-5, -5, 10]} intensity={0.4} color="#8888ff" />
-        <Environment preset="studio" background={false} blur={0.4} />
+      <ambientLight intensity={0.8} />
+      <directionalLight position={[10, 10, 5]} intensity={1.5} />
+      <directionalLight position={[-10, 10, 5]} intensity={1.2} />
+      <directionalLight position={[10, -10, 5]} intensity={1.0} />
+      <directionalLight position={[-10, -10, 5]} intensity={0.8} />
+      <directionalLight position={[0, 0, 10]} intensity={1.0} color="#ffffff" />
+      <pointLight position={[5, 5, 10]} intensity={0.8} color="#ffffff" />
+      <pointLight position={[-5, 5, 10]} intensity={0.8} color="#ffffff" />
+      <Environment preset="city" background={false} blur={0.2} />
       <ChromeLogo mousePosition={mousePosition} />
     </>
   );

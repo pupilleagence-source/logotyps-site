@@ -53,71 +53,96 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
         varying vec3 vNormal;
         varying vec3 vPosition;
         varying vec3 vWorldPosition;
+        varying vec3 vViewPosition;
+        varying vec2 vUv;
         uniform float uTime;
         
         void main() {
           vNormal = normalize(normalMatrix * normal);
           vPosition = position;
+          vUv = uv;
           
-          vec3 pos = position;
-          float wave = sin(pos.x * 0.5 + uTime * 2.0) * 0.3;
-          wave += sin(pos.y * 0.4 + uTime * 1.5) * 0.2;
-          pos += normal * wave * 0.15;
-          
-          vec4 worldPos = modelMatrix * vec4(pos, 1.0);
+          vec4 worldPos = modelMatrix * vec4(position, 1.0);
           vWorldPosition = worldPos.xyz;
           
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          vViewPosition = -mvPosition.xyz;
+          
+          gl_Position = projectionMatrix * mvPosition;
         }
       `,
       fragmentShader: `
         varying vec3 vNormal;
         varying vec3 vPosition;
         varying vec3 vWorldPosition;
+        varying vec3 vViewPosition;
+        varying vec2 vUv;
         uniform float uTime;
         
-        vec3 palette(float t) {
-          vec3 a = vec3(0.8, 0.8, 0.85);
-          vec3 b = vec3(0.2, 0.2, 0.25);
-          vec3 c = vec3(1.0, 1.0, 1.0);
-          vec3 d = vec3(0.0, 0.1, 0.2);
-          return a + b * cos(6.28318 * (c * t + d));
+        vec3 iridescence(vec3 viewDir, vec3 normal, float intensity) {
+          float NdotV = dot(normal, viewDir);
+          float hue = NdotV * 0.5 + 0.5;
+          
+          vec3 warm = vec3(1.0, 0.4, 0.2);
+          vec3 cool = vec3(0.2, 0.5, 1.0);
+          vec3 accent = vec3(0.9, 0.2, 0.3);
+          
+          vec3 color = mix(warm, cool, smoothstep(0.3, 0.7, hue));
+          color = mix(color, accent, smoothstep(0.6, 0.9, hue) * 0.5);
+          
+          return color * intensity;
         }
         
         void main() {
-          vec3 viewDir = normalize(cameraPosition - vWorldPosition);
           vec3 normal = normalize(vNormal);
+          vec3 viewDir = normalize(vViewPosition);
           
-          float fresnel = pow(1.0 - max(dot(viewDir, normal), 0.0), 3.0);
+          float NdotV = max(dot(normal, viewDir), 0.0);
+          float fresnel = pow(1.0 - NdotV, 5.0);
           
           vec3 reflectDir = reflect(-viewDir, normal);
-          float envAngle = atan(reflectDir.z, reflectDir.x) / 3.14159 * 0.5 + 0.5;
-          envAngle += sin(uTime * 0.5 + reflectDir.y * 2.0) * 0.1;
           
-          vec3 chromeColor = palette(envAngle + uTime * 0.1);
+          float liquidFlow = sin(vPosition.x * 0.06 + vPosition.y * 0.04 + uTime * 0.3) * 0.5 + 0.5;
+          liquidFlow *= sin(vPosition.y * 0.08 - vPosition.x * 0.02 + uTime * 0.25) * 0.5 + 0.5;
+          liquidFlow = smoothstep(0.1, 0.9, liquidFlow);
           
-          float ripple = sin(vPosition.x * 3.0 + uTime * 2.0) * 0.5 + 0.5;
-          ripple *= sin(vPosition.y * 2.5 + uTime * 1.8) * 0.5 + 0.5;
+          vec3 darkChrome = vec3(0.12, 0.13, 0.15);
+          vec3 midChrome = vec3(0.5, 0.52, 0.55);
+          vec3 lightChrome = vec3(0.85, 0.87, 0.9);
+          vec3 highlight = vec3(0.98, 0.98, 1.0);
           
-          vec3 liquidShift = vec3(
-            sin(uTime * 0.7 + vPosition.x) * 0.1,
-            sin(uTime * 0.8 + vPosition.y) * 0.1,
-            sin(uTime * 0.6 + vPosition.z) * 0.1
-          );
+          float envReflect = reflectDir.y * 0.5 + 0.5;
+          envReflect = mix(envReflect, liquidFlow, 0.4);
           
-          chromeColor += liquidShift;
-          chromeColor = mix(chromeColor, vec3(1.0), fresnel * 0.6);
-          chromeColor = mix(chromeColor, vec3(0.95, 0.97, 1.0), ripple * 0.15);
+          vec3 baseColor = mix(darkChrome, midChrome, smoothstep(0.0, 0.4, envReflect));
+          baseColor = mix(baseColor, lightChrome, smoothstep(0.4, 0.7, envReflect));
+          baseColor = mix(baseColor, highlight, smoothstep(0.7, 1.0, envReflect) * 0.8);
           
-          vec3 lightDir = normalize(vec3(1.0, 1.0, 1.0));
-          float specular = pow(max(dot(reflect(-lightDir, normal), viewDir), 0.0), 64.0);
-          chromeColor += vec3(1.0) * specular * 0.8;
+          float edgeFresnel = pow(1.0 - NdotV, 4.0);
+          vec3 edgeIridescence = iridescence(viewDir, normal, edgeFresnel * 0.6);
           
-          vec3 lightDir2 = normalize(vec3(-0.5, 0.8, 0.5));
-          float specular2 = pow(max(dot(reflect(-lightDir2, normal), viewDir), 0.0), 32.0);
-          chromeColor += vec3(0.9, 0.95, 1.0) * specular2 * 0.4;
+          float curvature = length(fwidth(normal)) * 50.0;
+          curvature = smoothstep(0.0, 1.0, curvature);
+          vec3 curveIridescence = iridescence(viewDir, normal, curvature * 0.3);
           
-          gl_FragColor = vec4(chromeColor, 1.0);
+          vec3 lightDir1 = normalize(vec3(0.5, 1.0, 0.8));
+          float diff1 = max(dot(normal, lightDir1), 0.0);
+          float spec1 = pow(max(dot(reflect(-lightDir1, normal), viewDir), 0.0), 256.0);
+          
+          vec3 lightDir2 = normalize(vec3(-0.8, 0.3, 0.5));
+          float spec2 = pow(max(dot(reflect(-lightDir2, normal), viewDir), 0.0), 128.0);
+          
+          vec3 finalColor = baseColor;
+          finalColor += edgeIridescence;
+          finalColor += curveIridescence;
+          finalColor += highlight * spec1 * 1.2;
+          finalColor += vec3(0.95, 0.97, 1.0) * spec2 * 0.5;
+          finalColor = mix(finalColor, highlight, fresnel * 0.4);
+          
+          float rimLight = pow(1.0 - NdotV, 2.5) * 0.15;
+          finalColor += highlight * rimLight;
+          
+          gl_FragColor = vec4(finalColor, 1.0);
         }
       `,
     });

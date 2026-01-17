@@ -3,7 +3,12 @@
 import { motion } from "framer-motion";
 import { StarBorderButton, SecondaryButton } from "./StarBorderButton";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const Chrome3DLogo = dynamic(() => import("./Chrome3DLogo").then(mod => ({ default: mod.Chrome3DLogo })), {
+  ssr: false,
+  loading: () => <div className="w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px]" />
+});
 
 export function HeroSection() {
   return (
@@ -57,95 +62,6 @@ export function HeroSection() {
       </nav>
 
       <div className="relative z-10 flex flex-col items-center max-w-[1200px] w-full mx-auto">
-        <div className="relative flex justify-center w-full mb-8">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none">
-            <div 
-              className="w-full h-full"
-              style={{
-                background: "radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%)",
-              }}
-            />
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative"
-          >
-            <div className="relative w-[280px] md:w-[320px] lg:w-[380px]">
-              <div 
-                className="relative bg-white rounded-[32px] p-4 shadow-2xl shadow-black/10 border border-[#E5E5E3]"
-                style={{
-                  background: "linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 100%)",
-                }}
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#27CA3F]" />
-                  <span className="ml-2 text-[10px] text-[#737373]">Logotyps Plugin</span>
-                </div>
-                
-                <div className="bg-[#F5F5F3] rounded-2xl p-4 mb-4">
-                  <div className="flex items-center justify-center mb-4">
-                    <img
-                      src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/logotyps-icon-1768677535568.png?width=8000&height=8000&resize=contain"
-                      alt="Logo Input"
-                      className="w-16 h-16 object-contain"
-                    />
-                  </div>
-                  <div className="text-center text-xs text-[#737373]">Original Logo</div>
-                </div>
-
-                <div className="grid grid-cols-4 gap-2 mb-4">
-                  {[
-                    { bg: "#FFFFFF", fg: "#1A1A1A" },
-                    { bg: "#1A1A1A", fg: "#FFFFFF" },
-                    { bg: "#FF6B35", fg: "#FFFFFF" },
-                    { bg: "#F5F5F3", fg: "#737373" },
-                    { bg: "linear-gradient(135deg, #FF6B35, #FF8F66)", fg: "#FFFFFF" },
-                    { bg: "#2D2D2D", fg: "#FF6B35" },
-                    { bg: "#E8E8E8", fg: "#1A1A1A" },
-                    { bg: "#FF8F66", fg: "#FFFFFF" },
-                  ].map((v, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ duration: 0.3, delay: 0.5 + i * 0.05 }}
-                      className="aspect-square rounded-lg flex items-center justify-center"
-                      style={{ background: v.bg }}
-                    >
-                      <svg viewBox="0 0 40 40" className="w-5 h-5" fill={v.fg}>
-                        <circle cx="20" cy="20" r="4" />
-                        <path d="M20 8 L21 12 L20 11 L19 12 Z" />
-                        <path d="M20 32 L21 28 L20 29 L19 28 Z" />
-                      </svg>
-                    </motion.div>
-                  ))}
-                </div>
-
-                <div className="flex items-center justify-between text-xs">
-                  <span className="text-[#737373]">8 of 150+ variations</span>
-                  <div className="flex items-center gap-1">
-                    <motion.div
-                      className="w-20 h-1.5 rounded-full bg-[#E5E5E3] overflow-hidden"
-                    >
-                      <motion.div
-                        className="h-full bg-[#FF6B35] rounded-full"
-                        initial={{ width: "0%" }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: 2, delay: 1 }}
-                      />
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
         <div className="flex flex-col items-center text-center">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
@@ -156,9 +72,24 @@ export function HeroSection() {
             Generate all your{" "}
             <span className="text-gradient-orange">logo variations</span>{" "}
             in seconds
-          </motion.h1>
-          
-          <motion.p 
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+              className="relative my-8"
+            >
+              <div 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] pointer-events-none"
+                style={{
+                  background: "radial-gradient(circle, rgba(255, 107, 53, 0.12) 0%, transparent 60%)",
+                }}
+              />
+              <Chrome3DLogo />
+            </motion.div>
+            
+            <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}

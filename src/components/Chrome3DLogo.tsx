@@ -45,16 +45,66 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
     return geo;
   }, []);
 
+  const uniforms = useMemo(() => ({
+    uTime: { value: 0 },
+  }), []);
+
   const chromeMaterial = useMemo(() => {
-    return new THREE.MeshStandardMaterial({
-      color: "#ffffff",
+    const mat = new THREE.MeshStandardMaterial({
+      color: "#e8e8e8",
       metalness: 1,
-      roughness: 0.35,
-      envMapIntensity: 2,
+      roughness: 0.15,
+      envMapIntensity: 2.5,
     });
-  }, []);
+
+    mat.onBeforeCompile = (shader) => {
+      shader.uniforms.uTime = uniforms.uTime;
+
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <common>',
+        `#include <common>
+        uniform float uTime;
+        
+        vec3 iridescence(float angle, float thickness) {
+          float d = thickness * cos(angle);
+          vec3 col;
+          col.r = cos(d * 12.0) * 0.5 + 0.5;
+          col.g = cos(d * 12.0 + 2.094) * 0.5 + 0.5;
+          col.b = cos(d * 12.0 + 4.188) * 0.5 + 0.5;
+          return col;
+        }
+        `
+      );
+
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <dithering_fragment>',
+        `#include <dithering_fragment>
+        vec3 viewDir = normalize(vViewPosition);
+        vec3 norm = normalize(vNormal);
+        float fresnel = pow(1.0 - abs(dot(viewDir, norm)), 3.0);
+        
+        float angle = acos(dot(viewDir, norm));
+        vec3 iriColor = iridescence(angle, 2.5 + sin(uTime * 0.5) * 0.3);
+        
+        vec3 rainbow = vec3(
+          sin(fresnel * 6.28 + 0.0) * 0.5 + 0.5,
+          sin(fresnel * 6.28 + 2.094) * 0.5 + 0.5,
+          sin(fresnel * 6.28 + 4.188) * 0.5 + 0.5
+        );
+        
+        vec3 holoColor = mix(iriColor, rainbow, 0.5);
+        gl_FragColor.rgb = mix(gl_FragColor.rgb, gl_FragColor.rgb + holoColor * 0.35, fresnel * 0.8);
+        gl_FragColor.rgb += holoColor * fresnel * 0.15;
+        `
+      );
+    };
+
+    return mat;
+  }, [uniforms]);
 
   useFrame((state, delta) => {
+    uniforms.uTime.value = state.clock.elapsedTime;
+    
     if (meshRef.current) {
       targetRotation.current.x = baseRotation.x + mousePosition.y * 0.4;
       targetRotation.current.y = baseRotation.y + mousePosition.x * 0.4;

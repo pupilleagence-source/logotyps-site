@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect, Suspense, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, useEnvironment } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import * as THREE from "three";
 import { SVGLoader } from "three-stdlib";
 
@@ -13,9 +13,9 @@ const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="111.59" height=
   </g>
 </svg>`;
 
-function ChromeLogo({ mousePosition, envMap }: { mousePosition: { x: number; y: number }, envMap: THREE.Texture | null }) {
+function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number } }) {
   const meshRef = useRef<THREE.Group>(null);
-  const materialRef = useRef<THREE.MeshStandardMaterial>(null);
+  const materialRef = useRef<THREE.ShaderMaterial>(null);
   const targetRotation = useRef({ x: 0, y: 0 });
   const baseRotation = { x: 0.15, y: -0.3 };
 
@@ -50,38 +50,38 @@ function ChromeLogo({ mousePosition, envMap }: { mousePosition: { x: number; y: 
   }), []);
 
   const chromeMaterial = useMemo(() => {
-    const mat = new THREE.ShaderMaterial({
-      uniforms: {
-        uTime: uniforms.uTime,
-        uEnvMap: { value: null },
-        uEnvMapIntensity: { value: 2.5 },
-      },
-      vertexShader: `
-        varying vec3 vNormal;
-        varying vec3 vViewPosition;
-        varying vec3 vWorldPosition;
-        varying vec3 vWorldNormal;
-        
-        void main() {
-          vNormal = normalize(normalMatrix * normal);
-          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-          vViewPosition = -mvPosition.xyz;
-          vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;
-          vWorldNormal = normalize(mat3(modelMatrix) * normal);
-          gl_Position = projectionMatrix * mvPosition;
-        }
-      `,
-      fragmentShader: `
-        precision highp float;
-        
+    const mat = new THREE.MeshStandardMaterial({
+      color: "#ffffff",
+      metalness: 1.0,
+      roughness: 0.0,
+      envMapIntensity: 2.5,
+    });
+
+    mat.onBeforeCompile = (shader) => {
+      shader.uniforms.uTime = uniforms.uTime;
+
+      shader.vertexShader = shader.vertexShader.replace(
+        '#include <common>',
+        `#include <common>
+        varying vec3 vWorldPos;
+        varying vec3 vViewDir;
+        `
+      );
+
+      shader.vertexShader = shader.vertexShader.replace(
+        '#include <worldpos_vertex>',
+        `#include <worldpos_vertex>
+        vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
+        vViewDir = normalize(cameraPosition - vWorldPos);
+        `
+      );
+
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <common>',
+        `#include <common>
         uniform float uTime;
-        uniform samplerCube uEnvMap;
-        uniform float uEnvMapIntensity;
-        
-        varying vec3 vNormal;
-        varying vec3 vViewPosition;
-        varying vec3 vWorldPosition;
-        varying vec3 vWorldNormal;
+        varying vec3 vWorldPos;
+        varying vec3 vViewDir;
         
         float hash(vec2 p) { 
           return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); 
@@ -97,59 +97,52 @@ function ChromeLogo({ mousePosition, envMap }: { mousePosition: { x: number; y: 
           vec2 u = f * f * (3.0 - 2.0 * f);
           return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
         }
+        `
+      );
+
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <normal_fragment_maps>',
+        `#include <normal_fragment_maps>
         
-        void main() {
-          vec3 viewDir = normalize(vViewPosition);
-          vec3 worldViewDir = normalize(cameraPosition - vWorldPosition);
-          vec3 norm = normalize(vNormal);
-          vec3 worldNorm = normalize(vWorldNormal);
-          
-          float t = uTime * 0.35;
-          vec2 noiseCoord = vWorldPosition.xy * 0.8;
-          float n1 = noise(noiseCoord * 3.0 + vec2(t, t * 0.7));
-          float n2 = noise(noiseCoord * 6.0 + vec2(-t * 0.8, t * 1.1));
-          vec3 liquidOffset = vec3((n1 - 0.5) * 0.4, (n2 - 0.5) * 0.4, 0.0);
-          vec3 perturbedNorm = normalize(worldNorm + liquidOffset);
-          
-          float fresnel = pow(1.0 - abs(dot(worldViewDir, perturbedNorm)), 3.0);
-          
-          vec3 reflectDir = reflect(-worldViewDir, perturbedNorm);
-          
-          float rgbSplitAmount = 0.08 + fresnel * 0.15;
-          vec3 reflectR = normalize(reflectDir + vec3(rgbSplitAmount, 0.0, 0.0));
-          vec3 reflectG = reflectDir;
-          vec3 reflectB = normalize(reflectDir - vec3(rgbSplitAmount, 0.0, 0.0));
-          
-          vec3 envColorR = textureCube(uEnvMap, reflectR).rgb;
-          vec3 envColorG = textureCube(uEnvMap, reflectG).rgb;
-          vec3 envColorB = textureCube(uEnvMap, reflectB).rgb;
-          
-          vec3 chrome = vec3(envColorR.r, envColorG.g, envColorB.b) * uEnvMapIntensity;
-          
-          vec3 rainbow = vec3(
-            sin(fresnel * 6.28 + uTime * 0.5) * 0.5 + 0.5,
-            sin(fresnel * 6.28 + 2.094 + uTime * 0.5) * 0.5 + 0.5,
-            sin(fresnel * 6.28 + 4.188 + uTime * 0.5) * 0.5 + 0.5
-          );
-          
-          chrome = mix(chrome, chrome + rainbow * 0.4, fresnel * 0.7);
-          chrome = mix(chrome, vec3(1.0), 0.05);
-          chrome += fresnel * 0.15;
-          
-          gl_FragColor = vec4(chrome, 1.0);
-        }
-      `,
-    });
-    
+        float t = uTime * 0.5;
+        vec2 noiseCoord = vWorldPos.xy * 0.015;
+        float n1 = noise(noiseCoord * 4.0 + vec2(t, t * 0.7));
+        float n2 = noise(noiseCoord * 8.0 + vec2(-t * 0.8, t * 1.1));
+        vec3 liquidOffset = vec3((n1 - 0.5) * 0.6, (n2 - 0.5) * 0.6, 0.0);
+        normal = normalize(normal + liquidOffset);
+        `
+      );
+
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <dithering_fragment>',
+        `#include <dithering_fragment>
+        
+        vec3 viewDir = normalize(vViewDir);
+        float fresnel = pow(1.0 - abs(dot(viewDir, normal)), 3.5);
+        
+        float rgbShift = 0.12 * fresnel;
+        vec3 shiftedColor;
+        shiftedColor.r = gl_FragColor.r * (1.0 + rgbShift);
+        shiftedColor.g = gl_FragColor.g;
+        shiftedColor.b = gl_FragColor.b * (1.0 - rgbShift);
+        gl_FragColor.rgb = mix(gl_FragColor.rgb, shiftedColor, 0.8);
+        
+        vec3 rainbow = vec3(
+          sin(fresnel * 8.0 + uTime * 0.6) * 0.5 + 0.5,
+          sin(fresnel * 8.0 + 2.094 + uTime * 0.6) * 0.5 + 0.5,
+          sin(fresnel * 8.0 + 4.188 + uTime * 0.6) * 0.5 + 0.5
+        );
+        gl_FragColor.rgb += rainbow * fresnel * 0.35;
+        gl_FragColor.rgb += fresnel * 0.12;
+        `
+      );
+    };
+
     return mat;
   }, [uniforms]);
 
   useFrame((state, delta) => {
     uniforms.uTime.value = state.clock.elapsedTime;
-    
-    if (envMap && chromeMaterial.uniforms.uEnvMap.value !== envMap) {
-      chromeMaterial.uniforms.uEnvMap.value = envMap;
-    }
     
     if (meshRef.current) {
       targetRotation.current.x = baseRotation.x + mousePosition.y * 0.4;
@@ -176,19 +169,15 @@ function ChromeLogo({ mousePosition, envMap }: { mousePosition: { x: number; y: 
 }
 
 function Scene({ mousePosition }: { mousePosition: { x: number; y: number } }) {
-  const envMap = useEnvironment({ preset: "city" });
-  
   return (
     <>
-      <ambientLight intensity={0.8} />
+      <Environment preset="city" />
+      <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1.5} />
       <directionalLight position={[-10, 10, 5]} intensity={1.2} />
-      <directionalLight position={[10, -10, 5]} intensity={1.0} />
-      <directionalLight position={[-10, -10, 5]} intensity={0.8} />
-      <directionalLight position={[0, 0, 10]} intensity={1.0} color="#ffffff" />
       <pointLight position={[5, 5, 10]} intensity={0.8} color="#ffffff" />
       <pointLight position={[-5, 5, 10]} intensity={0.8} color="#ffffff" />
-      <ChromeLogo mousePosition={mousePosition} envMap={envMap} />
+      <ChromeLogo mousePosition={mousePosition} />
     </>
   );
 }

@@ -1,5 +1,5 @@
 @import url('https://fonts.cdnfonts.com/css/gelica');
-@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500&display=swap');
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -97,12 +97,21 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-epilogue);
+    font-weight: 400;
   }
   h1, h2, h3, h4, h5, h6, .font-display {
     font-family: var(--font-gelica);
+    font-weight: 400 !important;
   }
   button, a, p, span, li, label, input, textarea {
     font-family: var(--font-epilogue);
+  }
+  .font-bold, .font-semibold {
+    font-weight: 500 !important;
+  }
+  h1.font-bold, h2.font-bold, h3.font-bold, h4.font-bold, h5.font-bold, h6.font-bold,
+  h1.font-semibold, h2.font-semibold, h3.font-semibold, h4.font-semibold, h5.font-semibold, h6.font-semibold {
+    font-weight: 400 !important;
   }
 }
 

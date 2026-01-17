@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect, Suspense, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, MeshTransmissionMaterial } from "@react-three/drei";
+import { Environment } from "@react-three/drei";
 import * as THREE from "three";
 import { SVGLoader } from "three-stdlib";
 
@@ -15,7 +15,6 @@ const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="111.59" height=
 
 function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number } }) {
   const meshRef = useRef<THREE.Group>(null);
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
   const targetRotation = useRef({ x: 0, y: 0 });
   const baseRotation = { x: 0.15, y: -0.3 };
 
@@ -45,43 +44,18 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
     return geo;
   }, []);
 
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      targetRotation.current.x = baseRotation.x + mousePosition.y * 0.4;
-      targetRotation.current.y = baseRotation.y + mousePosition.x * 0.4;
-
-      meshRef.current.rotation.x = THREE.MathUtils.lerp(
-        meshRef.current.rotation.x,
-        targetRotation.current.x,
-        delta * 4
-      );
-      meshRef.current.rotation.y = THREE.MathUtils.lerp(
-        meshRef.current.rotation.y,
-        targetRotation.current.y,
-        delta * 4
-      );
-    }
-    
-    if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
-    }
-  });
-
   const liquidChromeMaterial = useMemo(() => {
     return new THREE.ShaderMaterial({
       uniforms: {
         uTime: { value: 0 },
-        uEnvMap: { value: null },
       },
       vertexShader: `
         varying vec3 vNormal;
         varying vec3 vPosition;
         varying vec3 vWorldPosition;
-        varying vec2 vUv;
         uniform float uTime;
         
         void main() {
-          vUv = uv;
           vNormal = normalize(normalMatrix * normal);
           vPosition = position;
           
@@ -100,7 +74,6 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
         varying vec3 vNormal;
         varying vec3 vPosition;
         varying vec3 vWorldPosition;
-        varying vec2 vUv;
         uniform float uTime;
         
         vec3 palette(float t) {
@@ -150,9 +123,29 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
     });
   }, []);
 
+  useFrame((state, delta) => {
+    if (meshRef.current) {
+      targetRotation.current.x = baseRotation.x + mousePosition.y * 0.4;
+      targetRotation.current.y = baseRotation.y + mousePosition.x * 0.4;
+
+      meshRef.current.rotation.x = THREE.MathUtils.lerp(
+        meshRef.current.rotation.x,
+        targetRotation.current.x,
+        delta * 4
+      );
+      meshRef.current.rotation.y = THREE.MathUtils.lerp(
+        meshRef.current.rotation.y,
+        targetRotation.current.y,
+        delta * 4
+      );
+    }
+    
+    liquidChromeMaterial.uniforms.uTime.value = state.clock.elapsedTime;
+  });
+
   return (
     <group ref={meshRef} scale={0.022} rotation={[Math.PI + baseRotation.x, baseRotation.y, 0]}>
-      <mesh geometry={geometry} material={liquidChromeMaterial} ref={materialRef as any} />
+      <mesh geometry={geometry} material={liquidChromeMaterial} />
     </group>
   );
 }

@@ -160,7 +160,7 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
 function Scene({ mousePosition }: { mousePosition: { x: number; y: number } }) {
   return (
     <>
-      <Environment preset="studio" />
+      <Environment preset="park" />
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1.5} />
       <directionalLight position={[-10, 10, 5]} intensity={1.2} />

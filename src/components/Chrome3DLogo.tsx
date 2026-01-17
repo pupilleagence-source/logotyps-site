@@ -51,10 +51,10 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
 
   const chromeMaterial = useMemo(() => {
     const mat = new THREE.MeshStandardMaterial({
-      color: "#e8e8e8",
+      color: "#f0f0f0",
       metalness: 1,
-      roughness: 0.15,
-      envMapIntensity: 2.5,
+      roughness: 0.08,
+      envMapIntensity: 3.0,
     });
 
     mat.onBeforeCompile = (shader) => {
@@ -64,6 +64,21 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
         '#include <common>',
         `#include <common>
         uniform float uTime;
+        
+        float hash(vec2 p) { 
+          return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); 
+        }
+        
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          vec2 u = f * f * (3.0 - 2.0 * f);
+          return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+        }
         
         vec3 iridescence(float angle, float thickness) {
           float d = thickness * cos(angle);
@@ -81,20 +96,42 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
         `#include <dithering_fragment>
         vec3 viewDir = normalize(vViewPosition);
         vec3 norm = normalize(vNormal);
-        float fresnel = pow(1.0 - abs(dot(viewDir, norm)), 3.0);
         
-        float angle = acos(dot(viewDir, norm));
+        float t = uTime * 0.35;
+        vec2 noiseCoord = vViewPosition.xy * 0.5;
+        float n1 = noise(noiseCoord * 3.0 + vec2(t, t * 0.7));
+        float n2 = noise(noiseCoord * 6.0 + vec2(-t * 0.8, t * 1.1));
+        vec3 liquidNormal = normalize(vec3(n1 - 0.5, n2 - 0.5, 1.0));
+        vec3 perturbedNorm = normalize(mix(norm, liquidNormal, 0.25));
+        
+        float fresnel = pow(1.0 - abs(dot(viewDir, perturbedNorm)), 4.0);
+        
+        float rgbSplit = 0.03 * fresnel;
+        vec3 envSampleR = gl_FragColor.rgb + vec3(rgbSplit, 0.0, 0.0);
+        vec3 envSampleB = gl_FragColor.rgb - vec3(rgbSplit, 0.0, 0.0);
+        
+        vec3 chromaAberration = vec3(
+          gl_FragColor.r + rgbSplit * 2.0,
+          gl_FragColor.g,
+          gl_FragColor.b - rgbSplit * 2.0
+        );
+        gl_FragColor.rgb = mix(gl_FragColor.rgb, chromaAberration, fresnel * 0.6);
+        
+        float angle = acos(clamp(dot(viewDir, perturbedNorm), -1.0, 1.0));
         vec3 iriColor = iridescence(angle, 2.5 + sin(uTime * 0.5) * 0.3);
         
         vec3 rainbow = vec3(
-          sin(fresnel * 6.28 + 0.0) * 0.5 + 0.5,
-          sin(fresnel * 6.28 + 2.094) * 0.5 + 0.5,
-          sin(fresnel * 6.28 + 4.188) * 0.5 + 0.5
+          sin(fresnel * 6.28 + uTime * 0.3) * 0.5 + 0.5,
+          sin(fresnel * 6.28 + 2.094 + uTime * 0.3) * 0.5 + 0.5,
+          sin(fresnel * 6.28 + 4.188 + uTime * 0.3) * 0.5 + 0.5
         );
         
-        vec3 holoColor = mix(iriColor, rainbow, 0.6);
-        gl_FragColor.rgb = mix(gl_FragColor.rgb, gl_FragColor.rgb + holoColor * 0.5, fresnel * 0.9);
-        gl_FragColor.rgb += holoColor * fresnel * 0.25;
+        vec3 holoColor = mix(iriColor, rainbow, 0.65);
+        gl_FragColor.rgb = mix(gl_FragColor.rgb, gl_FragColor.rgb + holoColor * 0.6, fresnel * 0.95);
+        gl_FragColor.rgb += holoColor * fresnel * 0.3;
+        
+        gl_FragColor.rgb = mix(gl_FragColor.rgb, vec3(1.0), 0.08);
+        gl_FragColor.rgb += fresnel * 0.2;
         `
       );
     };

@@ -98,8 +98,11 @@
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-epilogue);
   }
-  h1, h2, h3, h4, h5, h6, button, .font-display {
+  h1, h2, h3, h4, h5, h6, .font-display {
     font-family: var(--font-gelica);
+  }
+  button, a, p, span, li, label, input, textarea {
+    font-family: var(--font-epilogue);
   }
 }
 

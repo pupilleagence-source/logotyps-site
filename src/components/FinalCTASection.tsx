@@ -34,17 +34,11 @@ export function FinalCTASection() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <motion.h2
-            className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-            style={{ fontFamily: "var(--font-syne)" }}
-          >
+          <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             Ready to transform your{" "}
             <span className="text-gradient-orange">workflow?</span>
-          </motion.h2>
-          <p
-            className="text-lg md:text-xl text-white/60 mb-10 max-w-2xl mx-auto"
-            style={{ fontFamily: "var(--font-instrument)" }}
-          >
+          </h2>
+          <p className="text-lg md:text-xl text-white/60 mb-10 max-w-2xl mx-auto">
             Join thousands of designers who have already automated their logo variation workflow.
             Start your free trial today — no credit card required.
           </p>

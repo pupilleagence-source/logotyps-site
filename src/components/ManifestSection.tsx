@@ -97,16 +97,16 @@ export function ManifestSection() {
             <span className="inline-block px-4 py-2 rounded-full bg-[#FF6B35]/20 text-[#FF6B35] text-sm font-medium mb-6">
               Our Manifest
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{ fontFamily: "var(--font-syne)" }}>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Designed by designers,{" "}
               <span className="text-gradient-orange">for designers</span>
             </h2>
-            <p className="text-lg text-white/70 mb-8 leading-relaxed" style={{ fontFamily: "var(--font-instrument)" }}>
+            <p className="text-lg text-white/70 mb-8 leading-relaxed">
               We&apos;ve been there — spending countless hours manually creating logo variations, 
               exporting files in different formats, organizing folders. It&apos;s tedious, 
               time-consuming, and frankly, soul-crushing work.
             </p>
-            <p className="text-lg text-white/70 mb-8 leading-relaxed" style={{ fontFamily: "var(--font-instrument)" }}>
+            <p className="text-lg text-white/70 mb-8 leading-relaxed">
               Logotyps was born from that frustration. We built the tool we always wished existed — 
               one that handles the repetitive work so you can focus on what you actually love: creating.
             </p>

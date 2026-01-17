@@ -56,10 +56,10 @@ export function FAQSection() {
           <span className="inline-block px-4 py-2 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] text-sm font-medium mb-4">
             FAQ
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style={{ fontFamily: "var(--font-syne)" }}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             Got <span className="text-gradient-orange">questions?</span>
           </h2>
-          <p className="text-lg text-[#737373]" style={{ fontFamily: "var(--font-instrument)" }}>
+          <p className="text-lg text-[#737373]">
             Everything you need to know about Logotyps.
           </p>
         </motion.div>
@@ -83,9 +83,9 @@ export function FAQSection() {
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   className="w-full px-6 py-5 flex items-center justify-between text-left"
                 >
-                  <span className="font-semibold text-base pr-4" style={{ fontFamily: "var(--font-syne)" }}>
+                  <h3 className="font-semibold text-base pr-4">
                     {faq.question}
-                  </span>
+                  </h3>
                   <motion.div
                     animate={{ rotate: openIndex === i ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
@@ -104,7 +104,7 @@ export function FAQSection() {
                       className="overflow-hidden"
                     >
                       <div className="px-6 pb-5">
-                        <p className="text-[#737373] leading-relaxed" style={{ fontFamily: "var(--font-instrument)" }}>
+                        <p className="text-[#737373] leading-relaxed">
                           {faq.answer}
                         </p>
                       </div>

@@ -233,10 +233,10 @@ export function BentoSection() {
           <span className="inline-block px-4 py-2 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] text-sm font-medium mb-4">
             Features
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style={{ fontFamily: "var(--font-syne)" }}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             Built for <span className="text-gradient-orange">efficiency</span>
           </h2>
-          <p className="text-lg text-[#737373] max-w-2xl mx-auto" style={{ fontFamily: "var(--font-instrument)" }}>
+          <p className="text-lg text-[#737373] max-w-2xl mx-auto">
             Every feature designed to save you hours of repetitive work.
           </p>
         </motion.div>
@@ -253,8 +253,8 @@ export function BentoSection() {
               <div className="h-40 mb-4 bg-[#FAFAF8] rounded-xl overflow-hidden">
                 {item.animation}
               </div>
-              <h3 className="text-lg font-bold mb-2" style={{ fontFamily: "var(--font-syne)" }}>{item.title}</h3>
-              <p className="text-sm text-[#737373]" style={{ fontFamily: "var(--font-instrument)" }}>{item.description}</p>
+              <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+              <p className="text-sm text-[#737373]">{item.description}</p>
             </motion.div>
           ))}
         </div>

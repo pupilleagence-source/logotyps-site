@@ -31,10 +31,10 @@ export function LogoVariationsSection() {
           <span className="inline-block px-4 py-2 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] text-sm font-medium mb-4">
             Visual Demonstration
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style={{ fontFamily: "var(--font-syne)" }}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             One logo, <span className="text-gradient-orange">infinite possibilities</span>
           </h2>
-          <p className="text-lg text-[#737373] max-w-2xl mx-auto" style={{ fontFamily: "var(--font-instrument)" }}>
+          <p className="text-lg text-[#737373] max-w-2xl mx-auto">
             Watch your single design transform into a complete brand package with every variation you&apos;ll ever need.
           </p>
         </motion.div>
@@ -117,7 +117,7 @@ export function LogoVariationsSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="bg-white rounded-2xl border border-[#E5E5E3] p-8 shadow-lg"
         >
-          <h3 className="text-xl font-bold mb-6" style={{ fontFamily: "var(--font-syne)" }}>Export Formats</h3>
+          <h3 className="text-xl font-bold mb-6">Export Formats</h3>
           <div className="flex flex-wrap gap-3">
             {exportFormats.map((format, i) => (
               <motion.div

@@ -70,10 +70,10 @@ export function PricingSection() {
           <span className="inline-block px-4 py-2 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] text-sm font-medium mb-4">
             Pricing
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style={{ fontFamily: "var(--font-syne)" }}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             Simple, <span className="text-gradient-orange">transparent</span> pricing
           </h2>
-          <p className="text-lg text-[#737373] max-w-2xl mx-auto" style={{ fontFamily: "var(--font-instrument)" }}>
+          <p className="text-lg text-[#737373] max-w-2xl mx-auto">
             Choose the plan that fits your workflow. No hidden fees, cancel anytime.
           </p>
         </motion.div>
@@ -100,11 +100,11 @@ export function PricingSection() {
                 } transition-all duration-300`}
               >
                 <div className="mb-6">
-                  <h3 className="text-xl font-bold mb-2" style={{ fontFamily: "var(--font-syne)" }}>{plan.name}</h3>
-                  <p className="text-sm text-[#737373]" style={{ fontFamily: "var(--font-instrument)" }}>{plan.description}</p>
+                  <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                  <p className="text-sm text-[#737373]">{plan.description}</p>
                 </div>
                 <div className="mb-6">
-                  <span className="text-4xl md:text-5xl font-bold" style={{ fontFamily: "var(--font-syne)" }}>{plan.price}</span>
+                  <span className="text-4xl md:text-5xl font-bold">{plan.price}</span>
                   <span className="text-[#737373]">{plan.period}</span>
                 </div>
                 <ul className="space-y-3 mb-8 flex-1">

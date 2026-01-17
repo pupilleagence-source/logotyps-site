@@ -47,10 +47,10 @@ export function ParametersSection() {
           <span className="inline-block px-4 py-2 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] text-sm font-medium mb-4">
             Parameters
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4" style={{ fontFamily: "var(--font-syne)" }}>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             Total <span className="text-gradient-orange">control</span>
           </h2>
-          <p className="text-lg text-[#737373] max-w-2xl mx-auto" style={{ fontFamily: "var(--font-instrument)" }}>
+          <p className="text-lg text-[#737373] max-w-2xl mx-auto">
             Customize every aspect of your logo generation process with intuitive parameters.
           </p>
         </motion.div>
@@ -71,8 +71,8 @@ export function ParametersSection() {
                 >
                   <param.icon className="w-7 h-7 text-[#1A1A1A] group-hover:text-[#FF6B35] transition-colors" />
                 </motion.div>
-                <h3 className="text-xl font-bold mb-3" style={{ fontFamily: "var(--font-syne)" }}>{param.title}</h3>
-                <p className="text-sm text-[#737373] mb-6" style={{ fontFamily: "var(--font-instrument)" }}>{param.description}</p>
+                <h3 className="text-xl font-bold mb-3">{param.title}</h3>
+                <p className="text-sm text-[#737373] mb-6">{param.description}</p>
                 <ul className="space-y-2">
                   {param.features.map((feature, j) => (
                     <li key={j} className="flex items-center gap-2 text-sm text-[#737373]">

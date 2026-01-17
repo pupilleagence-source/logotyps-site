@@ -53,7 +53,7 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
     const mat = new THREE.MeshStandardMaterial({
       color: "#ffffff",
       metalness: 1.0,
-      roughness: 0.35,
+      roughness: 0.25,
       envMapIntensity: 2.0,
     });
 

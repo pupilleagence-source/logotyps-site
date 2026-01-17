@@ -105,10 +105,10 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
         `#include <normal_fragment_maps>
         
         float t = uTime * 0.5;
-        vec2 noiseCoord = vWorldPos.xy * 0.015;
+        vec2 noiseCoord = vWorldPos.xy * 0.045;
         float n1 = noise(noiseCoord * 4.0 + vec2(t, t * 0.7));
         float n2 = noise(noiseCoord * 8.0 + vec2(-t * 0.8, t * 1.1));
-        vec3 liquidOffset = vec3((n1 - 0.5) * 0.6, (n2 - 0.5) * 0.6, 0.0);
+        vec3 liquidOffset = vec3((n1 - 0.5) * 0.35, (n2 - 0.5) * 0.35, 0.0);
         normal = normalize(normal + liquidOffset);
         `
       );

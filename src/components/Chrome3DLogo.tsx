@@ -92,9 +92,9 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
           sin(fresnel * 6.28 + 4.188) * 0.5 + 0.5
         );
         
-        vec3 holoColor = mix(iriColor, rainbow, 0.5);
-        gl_FragColor.rgb = mix(gl_FragColor.rgb, gl_FragColor.rgb + holoColor * 0.35, fresnel * 0.8);
-        gl_FragColor.rgb += holoColor * fresnel * 0.15;
+        vec3 holoColor = mix(iriColor, rainbow, 0.6);
+        gl_FragColor.rgb = mix(gl_FragColor.rgb, gl_FragColor.rgb + holoColor * 0.5, fresnel * 0.9);
+        gl_FragColor.rgb += holoColor * fresnel * 0.25;
         `
       );
     };
@@ -138,7 +138,7 @@ function Scene({ mousePosition }: { mousePosition: { x: number; y: number } }) {
       <directionalLight position={[0, 10, 10]} intensity={0.8} color="#ffffff" />
       <pointLight position={[5, 5, 10]} intensity={0.6} color="#FF6B35" />
       <pointLight position={[-5, -5, 10]} intensity={0.4} color="#8888ff" />
-      <Environment preset="sunset" background={false} blur={0.8} />
+        <Environment preset="studio" background={false} blur={0.4} />
       <ChromeLogo mousePosition={mousePosition} />
     </>
   );

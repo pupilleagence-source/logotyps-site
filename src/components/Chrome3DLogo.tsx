@@ -48,8 +48,8 @@ function ChromeLogo({ mousePosition }: { mousePosition: { x: number; y: number }
     return new THREE.MeshStandardMaterial({
       color: "#ffffff",
       metalness: 1,
-      roughness: 0.03,
-      envMapIntensity: 2.5,
+      roughness: 0.05,
+      envMapIntensity: 1.8,
     });
   }, []);
 
@@ -87,7 +87,7 @@ function Scene({ mousePosition }: { mousePosition: { x: number; y: number } }) {
       <directionalLight position={[0, 10, 10]} intensity={0.8} color="#ffffff" />
       <pointLight position={[5, 5, 10]} intensity={0.6} color="#FF6B35" />
       <pointLight position={[-5, -5, 10]} intensity={0.4} color="#8888ff" />
-      <Environment preset="studio" />
+      <Environment preset="sunset" background={false} blur={1} />
       <ChromeLogo mousePosition={mousePosition} />
     </>
   );

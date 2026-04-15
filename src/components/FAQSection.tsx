@@ -3,44 +3,46 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function FAQSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { t } = useLanguage();
 
   const faqs = [
     {
-      question: "What is Logotyps and how does it work?",
-      answer: "Logotyps is an Adobe Illustrator plugin that automatically generates all logo variations from a single design. Simply select your logo, run the plugin, and it creates all color variations, background options, and exports them in multiple formats — all organized in a structured folder system.",
+      question: t.faq.question1,
+      answer: t.faq.answer1,
     },
     {
-      question: "Which Adobe Illustrator versions are supported?",
-      answer: "Logotyps supports Adobe Illustrator CC 2020 and later versions. We recommend using the latest version for the best experience and access to all features.",
+      question: t.faq.question2,
+      answer: t.faq.answer2,
     },
     {
-      question: "How many logo variations does Logotyps create?",
-      answer: "Depending on your settings, Logotyps can generate 150+ variations per logo. This includes different color schemes (primary, inverse, monochrome, brand colors), background options (transparent, white, black, colored), and all standard export formats.",
+      question: t.faq.question3,
+      answer: t.faq.answer3,
     },
     {
-      question: "What export formats are available?",
-      answer: "Logotyps exports in 7 formats: SVG, PNG (multiple sizes), PDF, EPS, AI, JPG, and WEBP. Each format is optimized for its intended use case — vectors for print and scalability, rasters for web and social media.",
+      question: t.faq.question4,
+      answer: t.faq.answer4,
     },
     {
-      question: "Can I customize the output settings?",
-      answer: "Absolutely! You can customize color palettes, choose which variations to generate, set custom sizes, define your folder structure, and even save presets for future projects. Professional and Enterprise plans offer even more customization options.",
+      question: t.faq.question5,
+      answer: t.faq.answer5,
     },
     {
-      question: "Is there a free trial available?",
-      answer: "Yes! We offer a 14-day free trial with full access to all Professional features. No credit card required. You can generate up to 10 logos during the trial period.",
+      question: t.faq.question6,
+      answer: t.faq.answer6,
     },
     {
-      question: "How do I install the plugin?",
-      answer: "After subscribing, you'll receive a download link and installation instructions. The process takes less than 2 minutes: download the .zxp file, open it with Adobe Exchange, and restart Illustrator. The plugin will appear in your Extensions menu.",
+      question: t.faq.question7,
+      answer: t.faq.answer7,
     },
     {
-      question: "Can I cancel my subscription anytime?",
-      answer: "Yes, you can cancel your subscription at any time from your account dashboard. Your access will continue until the end of your current billing period. We also offer a 30-day money-back guarantee.",
+      question: t.faq.question8,
+      answer: t.faq.answer8,
     },
   ];
 
@@ -54,13 +56,13 @@ export function FAQSection() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 rounded-full bg-[#FF6B35]/10 text-[#FF6B35] text-sm font-medium mb-4">
-            FAQ
+            {t.faq.badge}
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Got <span className="text-gradient-orange">questions?</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-[400] mb-4" style={{ fontFamily: 'Gelica, sans-serif' }}>
+            {t.faq.title} <span className="text-gradient-orange">{t.faq.titleHighlight}</span>
           </h2>
           <p className="text-lg text-[#737373]">
-            Everything you need to know about Logotyps.
+            {t.faq.subtitle}
           </p>
         </motion.div>
 
@@ -83,7 +85,7 @@ export function FAQSection() {
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
                   className="w-full px-6 py-5 flex items-center justify-between text-left"
                 >
-                  <h3 className="font-semibold text-base pr-4">
+                  <h3 className="font-[400] text-base pr-4" style={{ fontFamily: 'Gelica, sans-serif' }}>
                     {faq.question}
                   </h3>
                   <motion.div

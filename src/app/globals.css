@@ -62,6 +62,7 @@
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-border-spin: border-spin 2s linear infinite;
 
   @keyframes accordion-down {
     from {
@@ -77,6 +78,14 @@
     }
     to {
       height: 0;
+    }
+  }
+  @keyframes border-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
     }
   }
 }

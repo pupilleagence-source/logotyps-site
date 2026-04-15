@@ -2,6 +2,7 @@
 
 import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 function Chrome3DLogo() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -84,6 +85,7 @@ function Chrome3DLogo() {
 export function ManifestSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   return (
     <section ref={ref} className="py-32 px-4 bg-[#1A1A1A] text-white overflow-hidden">
@@ -95,39 +97,36 @@ export function ManifestSection() {
             transition={{ duration: 0.8 }}
           >
             <span className="inline-block px-4 py-2 rounded-full bg-[#FF6B35]/20 text-[#FF6B35] text-sm font-medium mb-6">
-              Our Manifest
+              {t.manifest.badge}
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Designed by designers,{" "}
-              <span className="text-gradient-orange">for designers</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-[400] mb-6 leading-tight" style={{ fontFamily: 'Gelica, sans-serif' }}>
+              {t.manifest.title}{" "}
+              <span className="text-gradient-orange">{t.manifest.titleHighlight}</span>
             </h2>
             <p className="text-lg text-white/70 mb-8 leading-relaxed">
-              We&apos;ve been there — spending countless hours manually creating logo variations, 
-              exporting files in different formats, organizing folders. It&apos;s tedious, 
-              time-consuming, and frankly, soul-crushing work.
+              {t.manifest.subtitle1}
             </p>
             <p className="text-lg text-white/70 mb-8 leading-relaxed">
-              Logotyps was born from that frustration. We built the tool we always wished existed — 
-              one that handles the repetitive work so you can focus on what you actually love: creating.
+              {t.manifest.subtitle2}
             </p>
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-[#FF6B35]/20 flex items-center justify-center">
                   <span className="text-xl font-bold text-[#FF6B35]">5K+</span>
                 </div>
-                <span className="text-sm text-white/60">Active designers</span>
+                <span className="text-sm text-white/60">{t.manifest.stat1}</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-[#FF6B35]/20 flex items-center justify-center">
                   <span className="text-xl font-bold text-[#FF6B35]">2M+</span>
                 </div>
-                <span className="text-sm text-white/60">Logos generated</span>
+                <span className="text-sm text-white/60">{t.manifest.stat2}</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-[#FF6B35]/20 flex items-center justify-center">
                   <span className="text-xl font-bold text-[#FF6B35]">98%</span>
                 </div>
-                <span className="text-sm text-white/60">Time saved</span>
+                <span className="text-sm text-white/60">{t.manifest.stat3}</span>
               </div>
             </div>
           </motion.div>

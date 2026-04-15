@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { VisualEditsMessenger } from "orchids-visual-edits";
+import { ClientProviders } from "@/components/ClientProviders";
 
 export const metadata: Metadata = {
   title: "Logotyps - Generate All Logo Variations in Seconds",
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        {children}
-        <VisualEditsMessenger />
+        <ClientProviders>
+          {children}
+          <VisualEditsMessenger />
+        </ClientProviders>
       </body>
     </html>
   );

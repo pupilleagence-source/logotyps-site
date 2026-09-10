@@ -18,7 +18,7 @@ export const CUSTOMER_PORTAL = "https://logotyps.lemonsqueezy.com/billing";
 // de lancement est pré-rempli quand LAUNCH.enabled est vrai.
 const CHECKOUT_API = "https://logotyps.vercel.app/api/checkout";
 export const LAUNCH = { enabled: false, code: "LANCEMENT", until: "2026-10-05" };
-const withCode = (plan: string) => `${CHECKOUT_API}?plan=${plan}` + (LAUNCH.enabled ? `&code=${LAUNCH.code}` : "");
-export const CHECKOUT_ANNUAL = withCode("annual");
-export const CHECKOUT_LIFETIME = withCode("lifetime");
-export const CHECKOUT_STUDIO = withCode("studio");
+// `lang` : la langue affichée sur le site ; le backend traduit nom, description et
+// textes du reçu du checkout (les variantes restent bilingues dans Lemon Squeezy).
+export const checkoutUrl = (plan: "annual" | "lifetime" | "studio", lang: string) =>
+  `${CHECKOUT_API}?plan=${plan}&lang=${lang === "en" ? "en" : "fr"}` + (LAUNCH.enabled ? `&code=${LAUNCH.code}` : "");

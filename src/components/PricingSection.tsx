@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Check, Sparkles, Users, ShieldCheck } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { CHECKOUT_LIFETIME, CHECKOUT_ANNUAL, CHECKOUT_STUDIO, DOWNLOAD_PAGE, LAUNCH } from "@/lib/links";
+import { checkoutUrl, DOWNLOAD_PAGE, LAUNCH } from "@/lib/links";
 
 export function PricingSection() {
   const ref = useRef(null);
@@ -16,8 +16,8 @@ export function PricingSection() {
   // Annuel 39 €/an, À vie 59 €, Studio 149 € (10 postes). L'essai = 3 générations dans le plugin.
   const plans = [
     { name: p.freeName, price: p.freePrice, period: "", billed: "", description: p.freeDesc, features: p.freeFeatures, cta: p.ctaFree, href: DOWNLOAD_PAGE, external: false, popular: false },
-    { name: p.plusName, price: p.plusPrice, period: p.perYear, billed: p.billedYearly, description: p.plusDesc, features: p.plusFeatures, cta: p.ctaPlus, href: CHECKOUT_ANNUAL, external: true, popular: false },
-    { name: p.lifeName, price: p.lifePrice, period: p.oneTime, billed: "", description: p.lifeDesc, features: p.lifeFeatures, cta: p.ctaLife, href: CHECKOUT_LIFETIME, external: true, popular: true },
+    { name: p.plusName, price: p.plusPrice, period: p.perYear, billed: p.billedYearly, description: p.plusDesc, features: p.plusFeatures, cta: p.ctaPlus, href: checkoutUrl("annual", language), external: true, popular: false },
+    { name: p.lifeName, price: p.lifePrice, period: p.oneTime, billed: "", description: p.lifeDesc, features: p.lifeFeatures, cta: p.ctaLife, href: checkoutUrl("lifetime", language), external: true, popular: true },
   ];
 
   const launchUntil = LAUNCH.enabled
@@ -123,7 +123,7 @@ export function PricingSection() {
           <div className="flex items-center gap-4 md:justify-end">
             <span className="text-3xl font-bold tracking-tight">{p.studioPrice}</span>
             <a
-              href={CHECKOUT_STUDIO}
+              href={checkoutUrl("studio", language)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full py-2.5 px-5 text-sm font-medium bg-white text-[#1A1A1A] border border-[#E5E5E3] hover:border-[#FF6B35] hover:text-[#FF6B35] transition-all duration-200 whitespace-nowrap"

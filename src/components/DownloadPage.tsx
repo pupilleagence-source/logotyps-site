@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Apple, Monitor, Download, ArrowLeft, CheckCircle2, KeyRound, Copy, Check } from "lucide-react";
+import { Apple, Monitor, Download, ArrowLeft, CheckCircle2, KeyRound, Copy, Check, Settings2 } from "lucide-react";
 import { LanguageSelector } from "./LanguageSelector";
 import { Footer } from "./FinalCTASection";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { MY_ORDERS } from "@/lib/links";
+import { MY_ORDERS, CUSTOMER_PORTAL } from "@/lib/links";
 
 // Backend du plugin : version courante + redirection vers l'installeur.
 // /api/download répond par une 302 vers le fichier : le navigateur télécharge,
@@ -167,6 +167,9 @@ export function DownloadPage() {
               <p className="text-xs text-[#1A1A1A]/50 mt-3">
                 {u.keyNote} <a href={MY_ORDERS} target="_blank" rel="noopener noreferrer" className="underline hover:text-[#FF6B35]">app.lemonsqueezy.com/my-orders</a>.
               </p>
+              <p className="text-xs text-[#1A1A1A]/50 mt-1">
+                {u.manageSubNote} <a href={CUSTOMER_PORTAL} target="_blank" rel="noopener noreferrer" className="underline hover:text-[#FF6B35]">logotyps.lemonsqueezy.com/billing</a>
+              </p>
             </motion.div>
           )}
 
@@ -260,13 +263,16 @@ export function DownloadPage() {
 
           <p className="text-sm text-[#1A1A1A]/50 max-w-xl mx-auto">{u.hotUpdateNote}</p>
 
-          {!purchase && (
-            <p className="text-sm mt-6">
+          <p className="text-sm mt-6 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-2">
+            {!purchase && (
               <a href={MY_ORDERS} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#1A1A1A]/70 hover:text-[#FF6B35] underline underline-offset-2">
                 <KeyRound className="w-4 h-4" /> {u.alreadyCustomer}
               </a>
-            </p>
-          )}
+            )}
+            <a href={CUSTOMER_PORTAL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#1A1A1A]/70 hover:text-[#FF6B35] underline underline-offset-2">
+              <Settings2 className="w-4 h-4" /> {u.manageSub}
+            </a>
+          </p>
         </div>
       </section>
 

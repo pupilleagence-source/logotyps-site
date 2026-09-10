@@ -24,9 +24,9 @@ function detectPlatform(): Platform | null {
   return null;
 }
 
-export function UpdateDownload() {
+export function DownloadPage() {
   const { t, language } = useLanguage();
-  const u = t.update;
+  const u = t.download;
   const [latest, setLatest] = useState<Latest | null>(null);
   const [failed, setFailed] = useState(false);
   const [platform, setPlatform] = useState<Platform | null>(null);

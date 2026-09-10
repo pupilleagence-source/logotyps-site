@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // L'ancienne adresse /update a été diffusée (plugin 1.4.1, backend) : on la garde.
+  async redirects() {
+    return [{ source: "/update", destination: "/download", permanent: true }];
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

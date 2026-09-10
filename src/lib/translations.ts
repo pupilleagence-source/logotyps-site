@@ -198,7 +198,7 @@ export const translations = {
       question6: "Is there a free trial?",
       answer6: "Yes. The plugin ships with 3 free generations, with every feature enabled and no credit card. An Internet connection is required to count them. After that, pick the monthly Logotyps+ subscription or the Lifetime license.",
       question7: "How do I install the plugin?",
-      answer7: "Download the installer for macOS (.pkg) or Windows (.exe) from logotyps.fr/update, quit Illustrator, run it, then reopen Illustrator: the panel is under Window › Extensions › Logo Déclinaisons. From then on, new versions install themselves from the panel.",
+      answer7: "Download the installer for macOS (.pkg) or Windows (.exe) from logotyps.fr/download, quit Illustrator, run it, then reopen Illustrator: the panel is under Window › Extensions › Logo Déclinaisons. From then on, new versions install themselves from the panel.",
       question8: "How do licenses and cancellation work?",
       answer8: "Logotyps+ is billed monthly and can be cancelled at any time; you keep access until the end of the period. Lifetime is a single payment. Each license works on up to 3 computers: deactivate it from the panel to move it to another machine. Payments and invoices are handled by Lemon Squeezy."
     },
@@ -211,7 +211,7 @@ export const translations = {
       feature2: "No credit card required",
       feature3: "Lifetime license from €25"
     },
-    update: {
+    download: {
       badge: "Illustrator plugin",
       title: "Download",
       titleHighlight: "Logotyps",
@@ -439,7 +439,7 @@ export const translations = {
       question6: "Y a-t-il un essai gratuit ?",
       answer6: "Oui. Le plugin est livré avec 3 générations offertes, toutes fonctions activées et sans carte bancaire. Une connexion Internet est nécessaire pour les compter. Ensuite, choisissez l'abonnement mensuel Logotyps+ ou la licence Lifetime.",
       question7: "Comment installer le plugin ?",
-      answer7: "Téléchargez l'installeur macOS (.pkg) ou Windows (.exe) sur logotyps.fr/update, quittez Illustrator, lancez-le, puis rouvrez Illustrator : le panneau est dans Fenêtre › Extensions › Logo Déclinaisons. Ensuite, les nouvelles versions s'installent toutes seules depuis le panneau.",
+      answer7: "Téléchargez l'installeur macOS (.pkg) ou Windows (.exe) sur logotyps.fr/download, quittez Illustrator, lancez-le, puis rouvrez Illustrator : le panneau est dans Fenêtre › Extensions › Logo Déclinaisons. Ensuite, les nouvelles versions s'installent toutes seules depuis le panneau.",
       question8: "Comment fonctionnent les licences et l'annulation ?",
       answer8: "Logotyps+ est facturé chaque mois et s'annule à tout moment ; vous gardez l'accès jusqu'à la fin de la période. Lifetime est un paiement unique. Chaque licence fonctionne sur 3 postes au maximum : désactivez-la depuis le panneau pour la déplacer sur une autre machine. Paiements et factures sont gérés par Lemon Squeezy."
     },
@@ -452,7 +452,7 @@ export const translations = {
       feature2: "Sans carte bancaire",
       feature3: "Licence à vie dès 25 €"
     },
-    update: {
+    download: {
       badge: "Plugin Illustrator",
       title: "Télécharger",
       titleHighlight: "Logotyps",

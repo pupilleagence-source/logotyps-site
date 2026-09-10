@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { UpdateDownload } from "@/components/UpdateDownload";
+import { DownloadPage } from "@/components/DownloadPage";
 
 export const metadata: Metadata = {
   title: "Télécharger Logotyps — dernière version du plugin Illustrator",
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function UpdatePage() {
-  return <UpdateDownload />;
+export default function DownloadRoute() {
+  return <DownloadPage />;
 }

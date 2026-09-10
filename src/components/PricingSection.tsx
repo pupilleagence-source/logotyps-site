@@ -15,9 +15,9 @@ export function PricingSection() {
   // Grille alignée sur la boutique Lemon Squeezy (produit « License ») :
   // Annuel 39 €/an, À vie 59 €, Studio 149 € (10 postes). L'essai = 3 générations dans le plugin.
   const plans = [
-    { name: p.freeName, price: p.freePrice, period: "", description: p.freeDesc, features: p.freeFeatures, cta: p.ctaFree, href: DOWNLOAD_PAGE, external: false, popular: false },
-    { name: p.plusName, price: p.plusPrice, period: p.perYear, description: p.plusDesc, features: p.plusFeatures, cta: p.ctaPlus, href: CHECKOUT_ANNUAL, external: true, popular: false },
-    { name: p.lifeName, price: p.lifePrice, period: p.oneTime, description: p.lifeDesc, features: p.lifeFeatures, cta: p.ctaLife, href: CHECKOUT_LIFETIME, external: true, popular: true },
+    { name: p.freeName, price: p.freePrice, period: "", billed: "", description: p.freeDesc, features: p.freeFeatures, cta: p.ctaFree, href: DOWNLOAD_PAGE, external: false, popular: false },
+    { name: p.plusName, price: p.plusPrice, period: p.perYear, billed: p.billedYearly, description: p.plusDesc, features: p.plusFeatures, cta: p.ctaPlus, href: CHECKOUT_ANNUAL, external: true, popular: false },
+    { name: p.lifeName, price: p.lifePrice, period: p.oneTime, billed: "", description: p.lifeDesc, features: p.lifeFeatures, cta: p.ctaLife, href: CHECKOUT_LIFETIME, external: true, popular: true },
   ];
 
   const launchUntil = LAUNCH.enabled
@@ -70,9 +70,13 @@ export function PricingSection() {
                   <h3 className="text-xl font-[400] mb-1" style={{ fontFamily: "Gelica, sans-serif" }}>{plan.name}</h3>
                   <p className="text-sm text-[#737373]">{plan.description}</p>
                 </div>
-                <div className="mb-6 flex items-baseline gap-2">
-                  <span className="text-4xl md:text-5xl font-bold tracking-tight">{plan.price}</span>
-                  {plan.period && <span className="text-sm text-[#737373]">{plan.period}</span>}
+                <div className="mb-6">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl md:text-5xl font-bold tracking-tight">{plan.price}</span>
+                    {plan.period && <span className="text-sm text-[#737373]">{plan.period}</span>}
+                  </div>
+                  {/* Prix mensuel affiché, montant annuel réel juste dessous et dans le bouton : aucune surprise au checkout. */}
+                  {plan.billed && <div className="text-xs text-[#737373] mt-1">{plan.billed}</div>}
                 </div>
                 <ul className="space-y-2.5 mb-8 flex-1">
                   {plan.features.map((feature, j) => (

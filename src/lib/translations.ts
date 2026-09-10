@@ -2,7 +2,7 @@
 // au plugin (voir CLAUDE.md du dépôt logo-declinaisons) : 7 types × 2 cadrages ×
 // 5 couleurs = jusqu'à 70 planches, 5 formats (PNG, JPG, SVG, PDF, AI), 3 tailles +
 // favicon, charte InDesign avec 9 mockups Photoshop, essai = 3 générations,
-// licences Lemon Squeezy : Logotyps+ 6,50 €/mois ou Lifetime 25 €, 3 postes par clé,
+// licences Lemon Squeezy : Annuel 39 €/an, À vie 59 € (3 postes), Studio 149 € (10 postes),
 // Illustrator 2022+ (v26), macOS et Windows.
 export const translations = {
   en: {

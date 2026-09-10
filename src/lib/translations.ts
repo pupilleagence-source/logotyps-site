@@ -2,7 +2,7 @@
 // au plugin (voir CLAUDE.md du dépôt logo-declinaisons) : 7 types × 2 cadrages ×
 // 5 couleurs = jusqu'à 70 planches, 5 formats (PNG, JPG, SVG, PDF, AI), 3 tailles +
 // favicon, charte InDesign avec 9 mockups Photoshop, essai = 3 générations,
-// licences Lemon Squeezy : Annuel 39 €/an, À vie 59 € (3 postes), Studio 149 € (10 postes),
+// licences Lemon Squeezy : Annuel 39 €/an, À vie 59 € (3 postes), Studio 149 € (15 postes),
 // Illustrator 2022+ (v26), macOS et Windows.
 export const translations = {
   en: {
@@ -178,7 +178,7 @@ export const translations = {
       ],
       studioName: "Studio",
       studioPrice: "€149",
-      studioDesc: "One lifetime license for 10 computers: agencies, studios, schools.",
+      studioDesc: "One lifetime license for 15 computers: agencies, studios, schools.",
       ctaFree: "Download",
       ctaPlus: "Subscribe · €39/year",
       ctaLife: "Get the lifetime license",
@@ -208,7 +208,7 @@ export const translations = {
       question7: "How do I install the plugin?",
       answer7: "Download the installer for macOS (.pkg) or Windows (.exe) from logotyps.fr/download, quit Illustrator, run it, then reopen Illustrator: the panel is under Window › Extensions › Logo Déclinaisons. From then on, new versions install themselves from the panel.",
       question8: "How do licenses and cancellation work?",
-      answer8: "The annual license renews every year and can be cancelled at any time; you keep access until the end of the period. Lifetime and Studio are a single payment. Each license works on up to 3 computers (10 for Studio): deactivate it from the panel to move it to another machine. Not convinced? Full refund within 14 days. Payments and invoices are handled by Lemon Squeezy."
+      answer8: "The annual license renews every year and can be cancelled at any time; you keep access until the end of the period. Lifetime and Studio are a single payment. Each license works on up to 3 computers (15 for Studio): deactivate it from the panel to move it to another machine. Not convinced? Full refund within 14 days. Payments and invoices are handled by Lemon Squeezy."
     },
     cta: {
       title1: "Ready to deliver your",
@@ -427,7 +427,7 @@ export const translations = {
       ],
       studioName: "Studio",
       studioPrice: "149 €",
-      studioDesc: "Une licence à vie pour 10 postes : agences, studios, écoles.",
+      studioDesc: "Une licence à vie pour 15 postes : agences, studios, écoles.",
       ctaFree: "Télécharger",
       ctaPlus: "S'abonner · 39 €/an",
       ctaLife: "Prendre la licence à vie",
@@ -457,7 +457,7 @@ export const translations = {
       question7: "Comment installer le plugin ?",
       answer7: "Téléchargez l'installeur macOS (.pkg) ou Windows (.exe) sur logotyps.fr/download, quittez Illustrator, lancez-le, puis rouvrez Illustrator : le panneau est dans Fenêtre › Extensions › Logo Déclinaisons. Ensuite, les nouvelles versions s'installent toutes seules depuis le panneau.",
       question8: "Comment fonctionnent les licences et l'annulation ?",
-      answer8: "La licence annuelle se renouvelle chaque année et s'annule à tout moment ; vous gardez l'accès jusqu'à la fin de la période. À vie et Studio sont un paiement unique. Chaque licence fonctionne sur 3 postes au maximum (10 pour Studio) : désactivez-la depuis le panneau pour la déplacer sur une autre machine. Pas convaincu ? Remboursement intégral sous 14 jours. Paiements et factures sont gérés par Lemon Squeezy."
+      answer8: "La licence annuelle se renouvelle chaque année et s'annule à tout moment ; vous gardez l'accès jusqu'à la fin de la période. À vie et Studio sont un paiement unique. Chaque licence fonctionne sur 3 postes au maximum (15 pour Studio) : désactivez-la depuis le panneau pour la déplacer sur une autre machine. Pas convaincu ? Remboursement intégral sous 14 jours. Paiements et factures sont gérés par Lemon Squeezy."
     },
     cta: {
       title1: "Prêt à livrer votre",

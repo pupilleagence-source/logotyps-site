@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import { LanguageSelector } from "./LanguageSelector";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { usePluginTestingNotice } from "@/lib/usePluginTestingNotice";
+import { DOWNLOAD_PAGE, FEATURES_ANCHOR } from "@/lib/links";
 
 const Chrome3DLogo = dynamic(() => import("./Chrome3DLogo").then(mod => ({ default: mod.Chrome3DLogo })), {
   ssr: false,
@@ -16,7 +16,6 @@ const Chrome3DLogo = dynamic(() => import("./Chrome3DLogo").then(mod => ({ defau
 
 export function HeroSection() {
   const { t } = useLanguage();
-  const notify = usePluginTestingNotice();
 
   return (
     <section className="relative flex flex-col items-center justify-start overflow-hidden bg-[#FAFAF8] px-6 lg:px-11 pt-[100px] pb-[100px] min-h-screen w-full">
@@ -97,12 +96,12 @@ export function HeroSection() {
             <a href="#faq" className="text-sm px-4 py-2 rounded-full hover:bg-white/10 transition-colors">
               {t.nav.faq}
             </a>
-            <button
-              onClick={notify}
+            <a
+              href={DOWNLOAD_PAGE}
               className="text-sm px-4 py-2 rounded-full bg-[#FF6B35] hover:bg-[#FF6B35]/90 transition-colors cursor-pointer"
             >
               {t.nav.getStarted}
-            </button>
+            </a>
           </motion.div>
         </div>
       </nav>
@@ -165,46 +164,26 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-center gap-4 mb-6"
           >
-            {/* Primary Button - Download now */}
-            <motion.button
-              onClick={notify}
+            {/* Bouton principal : page de téléchargement */}
+            <motion.a
+              href={DOWNLOAD_PAGE}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-4 bg-[#FF6B35] text-white rounded-full font-medium text-base hover:bg-[#FF8F66] transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
+              className="group relative px-8 py-4 bg-[#FF6B35] text-white rounded-full font-medium text-base hover:bg-[#FF8F66] transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 whitespace-nowrap"
             >
               {t.hero.downloadNow}
               <ArrowRight className="w-5 h-5" />
-            </motion.button>
+            </motion.a>
 
-            {/* Secondary Button - Learn more */}
-            <motion.button
-              onClick={notify}
+            {/* Bouton secondaire : ancre vers les fonctionnalités */}
+            <motion.a
+              href={FEATURES_ANCHOR}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white text-[#1A1A1A] rounded-full font-medium text-base border-2 border-[#E5E5E3] hover:border-[#FF6B35] transition-all duration-300 shadow-sm hover:shadow-md"
+              className="px-8 py-4 bg-white text-[#1A1A1A] rounded-full font-medium text-base border-2 border-[#E5E5E3] hover:border-[#FF6B35] transition-all duration-300 shadow-sm hover:shadow-md whitespace-nowrap"
             >
               {t.hero.learnMore}
-            </motion.button>
-          </motion.div>
-
-          {/* Video Play Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mb-10"
-          >
-            <motion.button
-              onClick={notify}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="group flex items-center gap-3 text-[#1A1A1A] hover:text-[#FF6B35] transition-colors duration-300"
-            >
-              <div className="w-12 h-12 rounded-full bg-white border-2 border-[#E5E5E3] group-hover:border-[#FF6B35] flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
-                <Play className="w-5 h-5 fill-current" />
-              </div>
-              <span className="text-sm font-medium">{t.hero.watchDemo}</span>
-            </motion.button>
+            </motion.a>
           </motion.div>
 
           <motion.div

@@ -4,26 +4,28 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HeroSection } from "@/components/HeroSection";
 import { LogoVariationsSection } from "@/components/LogoVariationsSection";
-import { MacbookShowcaseSection } from "@/components/MacbookShowcaseSection";
+import { LogoSystemSection } from "@/components/LogoSystemSection";
 import { BentoGrid } from "@/components/BentoGrid";
 import { ManifestSection } from "@/components/ManifestSection";
 import { ParametersSection } from "@/components/ParametersSection";
 import { PricingSection } from "@/components/PricingSection";
 import { FAQSection } from "@/components/FAQSection";
 import { FinalCTASection, Footer } from "@/components/FinalCTASection";
-import { StarBorderButton } from "@/components/ui/StarBorderButton";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { usePluginTestingNotice } from "@/lib/usePluginTestingNotice";
+import { DOWNLOAD_PAGE } from "@/lib/links";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   const [showStickyCTA, setShowStickyCTA] = useState(false);
   const { t } = useLanguage();
-  const notify = usePluginTestingNotice();
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show sticky CTA after scrolling past hero (approx 800px)
-      setShowStickyCTA(window.scrollY > 800);
+      // Visible une fois le hero passé (~800 px), masqué dès que la section Tarifs
+      // (puis FAQ, CTA final) entre dans l'écran : elles ont leurs propres boutons.
+      const pricing = document.getElementById("pricing");
+      const pricingReached = !!pricing && pricing.getBoundingClientRect().top < window.innerHeight * 0.9;
+      setShowStickyCTA(window.scrollY > 800 && !pricingReached);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -35,7 +37,7 @@ export default function Home() {
       <HeroSection />
       <LogoVariationsSection />
       <BentoGrid />
-      <MacbookShowcaseSection />
+      <LogoSystemSection />
       <ManifestSection />
       <ParametersSection />
       <PricingSection />
@@ -52,9 +54,12 @@ export default function Home() {
             exit={{ y: 100, opacity: 0 }}
             className="fixed bottom-8 left-0 right-0 z-50 flex justify-center pointer-events-none"
           >
-            <div className="pointer-events-auto shadow-2xl rounded-full">
-              <StarBorderButton dark onClick={notify}>{t.hero.downloadNow}</StarBorderButton>
-            </div>
+            <a
+              href={DOWNLOAD_PAGE}
+              className="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-[#1A1A1A] text-white text-sm font-medium px-6 py-3 shadow-2xl border border-white/10 hover:bg-[#FF6B35] transition-colors duration-200"
+            >
+              {t.hero.downloadNow} <ArrowRight className="w-4 h-4" />
+            </a>
           </motion.div>
         )}
       </AnimatePresence>

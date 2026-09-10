@@ -139,7 +139,7 @@ export function UpdateDownload() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col sm:flex-row items-stretch justify-center gap-4 mb-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4"
           >
             {ordered.map(({ key, label, file, Icon }, i) => {
               const primary = platform ? key === platform : i === 0;
@@ -147,16 +147,18 @@ export function UpdateDownload() {
                 <a
                   key={key}
                   href={DOWNLOAD(key)}
-                  className={`group flex-1 sm:max-w-xs inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 text-base font-medium transition-all duration-200 hover:scale-[1.02] ${
+                  className={`group inline-flex items-center justify-center gap-2.5 rounded-full pl-5 pr-4 py-3 text-sm font-medium whitespace-nowrap transition-all duration-200 hover:scale-[1.02] ${
                     primary
                       ? "bg-[#FF6B35] text-white shadow-lg shadow-[#FF6B35]/25"
                       : "bg-white text-[#1A1A1A] border border-[#E5E5E3] hover:border-[#1A1A1A]/30"
                   }`}
                 >
-                  <Icon className="w-5 h-5" />
-                  <span>{label}</span>
-                  <span className={`text-xs ${primary ? "text-white/70" : "text-[#1A1A1A]/40"}`}>{file}</span>
-                  <Download className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" />
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span>
+                    {u.downloadFor} <strong className="font-semibold">{label}</strong>
+                  </span>
+                  <span className={`text-[11px] rounded-full px-2 py-0.5 ${primary ? "bg-white/15 text-white/85" : "bg-[#F5F5F3] text-[#1A1A1A]/50"}`}>{file}</span>
+                  <Download className="w-4 h-4 shrink-0 opacity-60 group-hover:opacity-100 transition-opacity" />
                 </a>
               );
             })}

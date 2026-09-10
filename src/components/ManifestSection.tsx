@@ -112,19 +112,19 @@ export function ManifestSection() {
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-[#FF6B35]/20 flex items-center justify-center">
-                  <span className="text-xl font-bold text-[#FF6B35]">5K+</span>
+                  <span className="text-xl font-bold text-[#FF6B35]">{t.manifest.stat1Value}</span>
                 </div>
                 <span className="text-sm text-white/60">{t.manifest.stat1}</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-[#FF6B35]/20 flex items-center justify-center">
-                  <span className="text-xl font-bold text-[#FF6B35]">2M+</span>
+                  <span className="text-xl font-bold text-[#FF6B35]">{t.manifest.stat2Value}</span>
                 </div>
                 <span className="text-sm text-white/60">{t.manifest.stat2}</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-[#FF6B35]/20 flex items-center justify-center">
-                  <span className="text-xl font-bold text-[#FF6B35]">98%</span>
+                  <span className="text-xl font-bold text-[#FF6B35]">{t.manifest.stat3Value}</span>
                 </div>
                 <span className="text-sm text-white/60">{t.manifest.stat3}</span>
               </div>

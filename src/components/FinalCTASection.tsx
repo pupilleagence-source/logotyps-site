@@ -2,16 +2,14 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { StarBorderButton } from "./StarBorderButton";
 import { ArrowRight, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { usePluginTestingNotice } from "@/lib/usePluginTestingNotice";
+import { DOWNLOAD_PAGE } from "@/lib/links";
 
 export function FinalCTASection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { t } = useLanguage();
-  const notify = usePluginTestingNotice();
 
   return (
     <section ref={ref} className="py-24 px-4 bg-[#1A1A1A] relative overflow-hidden">
@@ -47,9 +45,12 @@ export function FinalCTASection() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <StarBorderButton onClick={notify} className="text-lg px-10 py-5">
+            <a
+              href={DOWNLOAD_PAGE}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FF6B35] hover:bg-[#FF8F66] text-white text-lg font-medium px-10 py-4 transition-all duration-200 hover:scale-[1.02] shadow-[0_0_40px_rgba(255,107,53,0.35)] whitespace-nowrap"
+            >
               {t.cta.button} <ArrowRight className="w-5 h-5" />
-            </StarBorderButton>
+            </a>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-white/40">
@@ -84,7 +85,7 @@ export function Footer() {
   return (
     <footer className="py-12 px-4 bg-[#1A1A1A] border-t border-white/10">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 max-w-full overflow-hidden">
           <div className="flex items-center gap-3">
             <img
               src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/logotyps-horizontal-resized-1768677535430.webp?width=8000&height=8000&resize=contain"
@@ -92,7 +93,7 @@ export function Footer() {
               className="h-6 brightness-0 invert"
             />
           </div>
-          <div className="flex items-center gap-8 text-sm text-white/40">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-white/40 px-4">
             <a href="#" className="hover:text-white transition-colors">{t.footer.privacy}</a>
             <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>
             <a href="#" className="hover:text-white transition-colors">{t.footer.support}</a>

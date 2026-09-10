@@ -208,7 +208,7 @@ export const translations = {
       question7: "How do I install the plugin?",
       answer7: "Download the installer for macOS (.pkg) or Windows (.exe) from logotyps.fr/download, quit Illustrator, run it, then reopen Illustrator: the panel is under Window › Extensions › Logo Déclinaisons. From then on, new versions install themselves from the panel.",
       question8: "How do licenses and cancellation work?",
-      answer8: "The annual license renews every year and can be cancelled at any time; you keep access until the end of the period. Lifetime and Studio are a single payment. Each license works on up to 3 computers (15 for Studio): deactivate it from the panel to move it to another machine. Not convinced? Full refund within 14 days. Payments and invoices are handled by Lemon Squeezy."
+      answer8: "The annual license renews every year and can be cancelled at any time; you keep access until the end of the period. Lifetime and Studio are a single payment. Each license works on up to 3 computers (15 for Studio): deactivate it from the panel to move it to another machine. Not convinced? Full refund within 14 days. Payments and invoices are handled by Lemon Squeezy, and you can find your license keys at any time on app.lemonsqueezy.com/my-orders (login by email)."
     },
     cta: {
       title1: "Ready to deliver your",
@@ -236,7 +236,17 @@ export const translations = {
       step3: "Reopen Illustrator: the panel is under Window › Extensions › Logo Déclinaisons. Enter your license key from the panel, or start the free trial.",
       whatsNew: "What's new in",
       hotUpdateNote: "From version 1.4.0, the plugin updates itself from its panel: you will only need this page for a first install, or when a release says so.",
-      backHome: "Home"
+      backHome: "Home",
+      thanksTitle: "Thank you, your license is ready",
+      thanksText: "Here is your license key. It was also sent to",
+      thanksTextNoKey: "Your license key is in the receipt email we just sent you.",
+      yourKey: "Your license key",
+      copy: "Copy",
+      copied: "Copied",
+      activateHint: "Install the plugin below, open the panel in Illustrator, click the license button and paste the key. It works on 3 computers (15 for Studio).",
+      keyNote: "You can find your keys at any time on",
+      alreadyCustomer: "Already a customer? Find your license key",
+      findKeyPortal: "my orders (Lemon Squeezy)"
     },
     footer: {
       tagline: "The ultimate logo variation tool for Adobe Illustrator",
@@ -457,7 +467,7 @@ export const translations = {
       question7: "Comment installer le plugin ?",
       answer7: "Téléchargez l'installeur macOS (.pkg) ou Windows (.exe) sur logotyps.fr/download, quittez Illustrator, lancez-le, puis rouvrez Illustrator : le panneau est dans Fenêtre › Extensions › Logo Déclinaisons. Ensuite, les nouvelles versions s'installent toutes seules depuis le panneau.",
       question8: "Comment fonctionnent les licences et l'annulation ?",
-      answer8: "La licence annuelle se renouvelle chaque année et s'annule à tout moment ; vous gardez l'accès jusqu'à la fin de la période. À vie et Studio sont un paiement unique. Chaque licence fonctionne sur 3 postes au maximum (15 pour Studio) : désactivez-la depuis le panneau pour la déplacer sur une autre machine. Pas convaincu ? Remboursement intégral sous 14 jours. Paiements et factures sont gérés par Lemon Squeezy."
+      answer8: "La licence annuelle se renouvelle chaque année et s'annule à tout moment ; vous gardez l'accès jusqu'à la fin de la période. À vie et Studio sont un paiement unique. Chaque licence fonctionne sur 3 postes au maximum (15 pour Studio) : désactivez-la depuis le panneau pour la déplacer sur une autre machine. Pas convaincu ? Remboursement intégral sous 14 jours. Paiements et factures sont gérés par Lemon Squeezy, et vous retrouvez vos clés de licence à tout moment sur app.lemonsqueezy.com/my-orders (connexion par e-mail)."
     },
     cta: {
       title1: "Prêt à livrer votre",
@@ -485,7 +495,17 @@ export const translations = {
       step3: "Rouvrez Illustrator : le panneau est dans Fenêtre › Extensions › Logo Déclinaisons. Saisissez votre clé de licence depuis le panneau, ou lancez l'essai gratuit.",
       whatsNew: "Nouveautés de la version",
       hotUpdateNote: "À partir de la version 1.4.0, le plugin se met à jour tout seul depuis son panneau : cette page ne sert qu'à une première installation, ou quand une version le demande.",
-      backHome: "Accueil"
+      backHome: "Accueil",
+      thanksTitle: "Merci, votre licence est prête",
+      thanksText: "Voici votre clé de licence. Elle a aussi été envoyée à",
+      thanksTextNoKey: "Votre clé de licence est dans l'e-mail de reçu que nous venons de vous envoyer.",
+      yourKey: "Votre clé de licence",
+      copy: "Copier",
+      copied: "Copiée",
+      activateHint: "Installez le plugin ci-dessous, ouvrez le panneau dans Illustrator, cliquez sur le bouton licence et collez la clé. Elle fonctionne sur 3 postes (15 pour Studio).",
+      keyNote: "Vous retrouverez vos clés à tout moment sur",
+      alreadyCustomer: "Déjà client ? Retrouver ma clé de licence",
+      findKeyPortal: "mes commandes (Lemon Squeezy)"
     },
     footer: {
       tagline: "L'outil ultime de déclinaison de logo pour Adobe Illustrator",

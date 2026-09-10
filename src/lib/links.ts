@@ -6,6 +6,8 @@
 // Achat : voir CHECKOUT_* ci-dessous.
 export const DOWNLOAD_PAGE = "/download";
 export const FEATURES_ANCHOR = "#features";
+// Portail global Lemon Squeezy : le client retrouve ses commandes et clés avec son e-mail (lien magique).
+export const MY_ORDERS = "https://app.lemonsqueezy.com/my-orders";
 
 // Chaque bouton passe par le backend du plugin, qui crée un checkout Lemon Squeezy avec
 // le plan choisi présélectionné ET les deux autres commutables sur la page de paiement

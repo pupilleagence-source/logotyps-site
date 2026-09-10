@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Apple, Monitor, Download, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { Apple, Monitor, Download, ArrowLeft, CheckCircle2, KeyRound, Copy, Check } from "lucide-react";
 import { LanguageSelector } from "./LanguageSelector";
 import { Footer } from "./FinalCTASection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { MY_ORDERS } from "@/lib/links";
 
 // Backend du plugin : version courante + redirection vers l'installeur.
 // /api/download répond par une 302 vers le fichier : le navigateur télécharge,
@@ -30,9 +31,21 @@ export function DownloadPage() {
   const [latest, setLatest] = useState<Latest | null>(null);
   const [failed, setFailed] = useState(false);
   const [platform, setPlatform] = useState<Platform | null>(null);
+  // Après un achat, Lemon Squeezy redirige ici avec ?achat=1&key=…&email=… (variables de lien).
+  const [purchase, setPurchase] = useState<{ key: string; email: string } | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     setPlatform(detectPlatform());
+    try {
+      const q = new URLSearchParams(window.location.search);
+      if (q.get("achat") === "1") {
+        const key = (q.get("key") || "").trim();
+        setPurchase({ key: /^[A-Za-z0-9-]{8,}$/.test(key) ? key : "", email: q.get("email") || "" });
+        // La clé ne reste pas dans la barre d'adresse ni dans l'historique.
+        window.history.replaceState(null, "", "/download?achat=1");
+      }
+    } catch (e) {}
     const controller = new AbortController();
     fetch(`${API}/api/version/latest`, { signal: controller.signal, cache: "no-store" })
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
@@ -48,6 +61,11 @@ export function DownloadPage() {
         day: "numeric",
       })
     : null;
+
+  const copyKey = async () => {
+    if (!purchase?.key) return;
+    try { await navigator.clipboard.writeText(purchase.key); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch (e) {}
+  };
 
   const buttons: { key: Platform; label: string; file: string; Icon: typeof Apple }[] = [
     { key: "mac", label: u.mac, file: ".pkg", Icon: Apple },
@@ -113,6 +131,44 @@ export function DownloadPage() {
           >
             {u.subtitle}
           </motion.p>
+
+          {/* Après achat : la clé de licence, tout de suite */}
+          {purchase && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-left rounded-[16px] bg-white border border-[#FF6B35] shadow-xl shadow-[#FF6B35]/10 p-6 mb-10"
+            >
+              <div className="flex items-center gap-2 text-[#1A1A1A] font-semibold mb-2">
+                <KeyRound className="w-5 h-5 text-[#FF6B35]" /> {u.thanksTitle}
+              </div>
+              {purchase.key ? (
+                <>
+                  <p className="text-sm text-[#1A1A1A]/70 mb-3">
+                    {u.thanksText} {purchase.email && <strong>{purchase.email}</strong>}.
+                  </p>
+                  <div className="text-xs uppercase tracking-wide text-[#1A1A1A]/50 mb-1">{u.yourKey}</div>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-4">
+                    <code className="flex-1 font-mono text-base sm:text-lg tracking-wide bg-[#F5F5F3] border border-[#E5E5E3] rounded-lg px-4 py-3 select-all break-all">{purchase.key}</code>
+                    <button
+                      type="button"
+                      onClick={copyKey}
+                      className="inline-flex items-center justify-center gap-2 rounded-full bg-[#1A1A1A] text-white text-sm font-medium px-5 py-3 hover:bg-[#FF6B35] transition-colors whitespace-nowrap"
+                    >
+                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />} {copied ? u.copied : u.copy}
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <p className="text-sm text-[#1A1A1A]/70 mb-3">{u.thanksTextNoKey}</p>
+              )}
+              <p className="text-sm text-[#1A1A1A]/70">{u.activateHint}</p>
+              <p className="text-xs text-[#1A1A1A]/50 mt-3">
+                {u.keyNote} <a href={MY_ORDERS} target="_blank" rel="noopener noreferrer" className="underline hover:text-[#FF6B35]">app.lemonsqueezy.com/my-orders</a>.
+              </p>
+            </motion.div>
+          )}
 
           {/* Version */}
           <motion.div
@@ -203,6 +259,14 @@ export function DownloadPage() {
           )}
 
           <p className="text-sm text-[#1A1A1A]/50 max-w-xl mx-auto">{u.hotUpdateNote}</p>
+
+          {!purchase && (
+            <p className="text-sm mt-6">
+              <a href={MY_ORDERS} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[#1A1A1A]/70 hover:text-[#FF6B35] underline underline-offset-2">
+                <KeyRound className="w-4 h-4" /> {u.alreadyCustomer}
+              </a>
+            </p>
+          )}
         </div>
       </section>
 

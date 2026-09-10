@@ -178,6 +178,24 @@ export const translations = {
       feature2: "No credit card required",
       feature3: "Cancel anytime"
     },
+    update: {
+      badge: "Illustrator plugin",
+      title: "Download",
+      titleHighlight: "Logotyps",
+      subtitle: "The latest version of the plugin for macOS and Windows. Same installer for a first install and for an update.",
+      version: "Version",
+      versionUnavailable: "Latest version: see the download buttons",
+      loading: "Checking the latest version…",
+      mac: "Download for macOS",
+      windows: "Download for Windows",
+      sizeHint: "About 280 MB on macOS, 130 MB on Windows: the installer includes the InDesign template and the mockups.",
+      step1: "Quit Adobe Illustrator completely before installing.",
+      step2: "Run the installer (.pkg on macOS, .exe on Windows) and follow the steps. On Windows, SmartScreen may ask you to confirm: choose “More info”, then “Run anyway”.",
+      step3: "Reopen Illustrator: the panel is under Window › Extensions › Logo Déclinaisons. Enter your license key from the panel, or start the free trial.",
+      whatsNew: "What's new in",
+      hotUpdateNote: "From version 1.4.0, the plugin updates itself from its panel: you will only need this page for a first install, or when a release says so.",
+      backHome: "Home"
+    },
     footer: {
       tagline: "The ultimate logo variation tool for Adobe Illustrator",
       product: "Product",
@@ -372,6 +390,24 @@ export const translations = {
       feature1: "Essai gratuit de 14 jours",
       feature2: "Aucune carte de crédit requise",
       feature3: "Annulez à tout moment"
+    },
+    update: {
+      badge: "Plugin Illustrator",
+      title: "Télécharger",
+      titleHighlight: "Logotyps",
+      subtitle: "La dernière version du plugin pour macOS et Windows. Le même installeur sert pour une première installation et pour une mise à jour.",
+      version: "Version",
+      versionUnavailable: "Dernière version : voir les boutons de téléchargement",
+      loading: "Vérification de la dernière version…",
+      mac: "Télécharger pour macOS",
+      windows: "Télécharger pour Windows",
+      sizeHint: "Environ 280 Mo sur macOS, 130 Mo sur Windows : l'installeur embarque le template InDesign et les mockups.",
+      step1: "Quittez complètement Adobe Illustrator avant d'installer.",
+      step2: "Lancez l'installeur (.pkg sur macOS, .exe sur Windows) et suivez les étapes. Sur Windows, SmartScreen peut demander confirmation : « Informations complémentaires », puis « Exécuter quand même ».",
+      step3: "Rouvrez Illustrator : le panneau est dans Fenêtre › Extensions › Logo Déclinaisons. Saisissez votre clé de licence depuis le panneau, ou lancez l'essai gratuit.",
+      whatsNew: "Nouveautés de la version",
+      hotUpdateNote: "À partir de la version 1.4.0, le plugin se met à jour tout seul depuis son panneau : cette page ne sert qu'à une première installation, ou quand une version le demande.",
+      backHome: "Accueil"
     },
     footer: {
       tagline: "L'outil ultime de variation de logo pour Adobe Illustrator",

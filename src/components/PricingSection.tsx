@@ -2,23 +2,27 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, Users, ShieldCheck } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { CHECKOUT_LIFETIME, CHECKOUT_MONTHLY, DOWNLOAD_PAGE } from "@/lib/links";
+import { CHECKOUT_LIFETIME, CHECKOUT_ANNUAL, CHECKOUT_STUDIO, DOWNLOAD_PAGE, LAUNCH } from "@/lib/links";
 
 export function PricingSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const p = t.pricing;
 
-  // Les deux licences existent réellement chez Lemon Squeezy (produit « License ») :
-  // Logotyps+ 6,50 €/mois et Lifetime 25 €. L'essai gratuit = 3 générations dans le plugin.
+  // Grille alignée sur la boutique Lemon Squeezy (produit « License ») :
+  // Annuel 39 €/an, À vie 59 €, Studio 149 € (10 postes). L'essai = 3 générations dans le plugin.
   const plans = [
     { name: p.freeName, price: p.freePrice, period: "", description: p.freeDesc, features: p.freeFeatures, cta: p.ctaFree, href: DOWNLOAD_PAGE, external: false, popular: false },
-    { name: p.plusName, price: p.plusPrice, period: p.perMonth, description: p.plusDesc, features: p.plusFeatures, cta: p.ctaPlus, href: CHECKOUT_MONTHLY, external: true, popular: false },
+    { name: p.plusName, price: p.plusPrice, period: p.perYear, description: p.plusDesc, features: p.plusFeatures, cta: p.ctaPlus, href: CHECKOUT_ANNUAL, external: true, popular: false },
     { name: p.lifeName, price: p.lifePrice, period: p.oneTime, description: p.lifeDesc, features: p.lifeFeatures, cta: p.ctaLife, href: CHECKOUT_LIFETIME, external: true, popular: true },
   ];
+
+  const launchUntil = LAUNCH.enabled
+    ? new Date(LAUNCH.until).toLocaleDateString(language === "fr" ? "fr-FR" : "en-US", { day: "numeric", month: "long" })
+    : "";
 
   return (
     <section ref={ref} id="pricing" className="py-24 px-4 bg-[#F5F5F3]">
@@ -36,6 +40,11 @@ export function PricingSection() {
             {p.title} <span className="text-gradient-orange">{p.titleHighlight}</span> {p.titleEnd}
           </h2>
           <p className="text-lg text-[#737373] max-w-2xl mx-auto">{p.subtitle}</p>
+          {LAUNCH.enabled && (
+            <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#1A1A1A] text-white text-sm px-4 py-2">
+              {p.launch} <code className="font-mono font-semibold tracking-wide bg-white/15 rounded px-2 py-0.5">{LAUNCH.code}</code> {p.launchUntil} {launchUntil}
+            </p>
+          )}
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
@@ -90,7 +99,39 @@ export function PricingSection() {
           ))}
         </div>
 
-        <p className="text-center text-xs text-[#737373]/80 mt-8">{p.note}</p>
+        {/* Studio : une ligne, pas une 4e carte */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="mt-6 bg-white rounded-2xl border border-[#E5E5E3] p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-4"
+        >
+          <div className="flex items-center gap-3 md:w-40 shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[#F5F5F3] flex items-center justify-center text-[#1A1A1A]">
+              <Users className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="font-[400] text-lg" style={{ fontFamily: "Gelica, sans-serif" }}>{p.studioName}</div>
+              <div className="text-xs text-[#737373]">{p.oneTime}</div>
+            </div>
+          </div>
+          <p className="text-sm text-[#4a4a4a] flex-1">{p.studioDesc}</p>
+          <div className="flex items-center gap-4 md:justify-end">
+            <span className="text-3xl font-bold tracking-tight">{p.studioPrice}</span>
+            <a
+              href={CHECKOUT_STUDIO}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full py-2.5 px-5 text-sm font-medium bg-white text-[#1A1A1A] border border-[#E5E5E3] hover:border-[#FF6B35] hover:text-[#FF6B35] transition-all duration-200 whitespace-nowrap"
+            >
+              {p.ctaStudio}
+            </a>
+          </div>
+        </motion.div>
+
+        <p className="text-center text-xs text-[#737373]/80 mt-8 inline-flex items-center justify-center gap-2 w-full">
+          <ShieldCheck className="w-4 h-4 text-[#FF6B35]" /> {p.note}
+        </p>
       </div>
     </section>
   );

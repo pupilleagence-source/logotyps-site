@@ -138,9 +138,9 @@ export const translations = {
       title: "Simple,",
       titleHighlight: "transparent",
       titleEnd: "pricing",
-      subtitle: "One plugin, two ways to pay for it. Try it for free first.",
+      subtitle: "One plugin, three ways to pay for it. Try it for free first.",
       mostPopular: "Most Popular",
-      perMonth: "/month",
+      perYear: "/year",
       oneTime: "one-time",
       freeName: "Free trial",
       freePrice: "€0",
@@ -151,9 +151,9 @@ export const translations = {
         "No credit card",
         "Internet connection required"
       ],
-      plusName: "Logotyps+",
-      plusPrice: "€6.50",
-      plusDesc: "Monthly, no commitment",
+      plusName: "Annual",
+      plusPrice: "€39",
+      plusDesc: "For a logo now and then",
       plusFeatures: [
         "Unlimited generations",
         "Every variation and color treatment",
@@ -161,10 +161,10 @@ export const translations = {
         "InDesign brand guide + 9 mockups",
         "3 computers per license",
         "Updates included",
-        "Cancel anytime"
+        "Renews yearly, cancel anytime"
       ],
       lifeName: "Lifetime",
-      lifePrice: "€25",
+      lifePrice: "€59",
       lifeDesc: "Pay once, keep it forever",
       lifeFeatures: [
         "Unlimited generations",
@@ -175,10 +175,17 @@ export const translations = {
         "Updates included",
         "One payment, lifetime license"
       ],
+      studioName: "Studio",
+      studioPrice: "€149",
+      studioDesc: "One lifetime license for 10 computers: agencies, studios, schools.",
       ctaFree: "Download",
       ctaPlus: "Subscribe",
       ctaLife: "Get the lifetime license",
-      note: "Secure payment by Lemon Squeezy · License key sent by email · Activate it from the plugin panel"
+      ctaStudio: "Get Studio",
+      launch: "Launch offer: −25% with code",
+      launchUntil: "until",
+      guarantee: "14-day money-back guarantee",
+      note: "Secure payment by Lemon Squeezy · License key sent by email · Activate it from the plugin panel · 14-day money-back guarantee"
     },
     faq: {
       badge: "FAQ",
@@ -196,11 +203,11 @@ export const translations = {
       question5: "Can I customize the output?",
       answer5: "Yes: which versions to generate, the framing, the color treatments (including a dark or light monochrome color and your own palette), the formats, the sizes, the name of the parent folder, and whether to build the InDesign brand guide.",
       question6: "Is there a free trial?",
-      answer6: "Yes. The plugin ships with 3 free generations, with every feature enabled and no credit card. An Internet connection is required to count them. After that, pick the monthly Logotyps+ subscription or the Lifetime license.",
+      answer6: "Yes. The plugin ships with 3 free generations, with every feature enabled and no credit card. An Internet connection is required to count them. After that, pick the annual license (€39/year) or the lifetime license (€59, one payment).",
       question7: "How do I install the plugin?",
       answer7: "Download the installer for macOS (.pkg) or Windows (.exe) from logotyps.fr/download, quit Illustrator, run it, then reopen Illustrator: the panel is under Window › Extensions › Logo Déclinaisons. From then on, new versions install themselves from the panel.",
       question8: "How do licenses and cancellation work?",
-      answer8: "Logotyps+ is billed monthly and can be cancelled at any time; you keep access until the end of the period. Lifetime is a single payment. Each license works on up to 3 computers: deactivate it from the panel to move it to another machine. Payments and invoices are handled by Lemon Squeezy."
+      answer8: "The annual license renews every year and can be cancelled at any time; you keep access until the end of the period. Lifetime and Studio are a single payment. Each license works on up to 3 computers (10 for Studio): deactivate it from the panel to move it to another machine. Not convinced? Full refund within 14 days. Payments and invoices are handled by Lemon Squeezy."
     },
     cta: {
       title1: "Ready to deliver your",
@@ -209,7 +216,7 @@ export const translations = {
       button: "Download for free",
       feature1: "3 free generations",
       feature2: "No credit card required",
-      feature3: "Lifetime license from €25"
+      feature3: "Lifetime license for €59"
     },
     download: {
       badge: "Illustrator plugin",
@@ -379,9 +386,9 @@ export const translations = {
       title: "Tarifs simples et",
       titleHighlight: "transparents",
       titleEnd: "",
-      subtitle: "Un seul plugin, deux façons de le payer. Essayez-le d'abord gratuitement.",
+      subtitle: "Un seul plugin, trois façons de le payer. Essayez-le d'abord gratuitement.",
       mostPopular: "Le plus choisi",
-      perMonth: "/mois",
+      perYear: "/an",
       oneTime: "une seule fois",
       freeName: "Essai gratuit",
       freePrice: "0 €",
@@ -392,9 +399,9 @@ export const translations = {
         "Sans carte bancaire",
         "Connexion Internet requise"
       ],
-      plusName: "Logotyps+",
-      plusPrice: "6,50 €",
-      plusDesc: "Mensuel, sans engagement",
+      plusName: "Annuel",
+      plusPrice: "39 €",
+      plusDesc: "Pour un logo de temps en temps",
       plusFeatures: [
         "Générations illimitées",
         "Toutes les déclinaisons et couleurs",
@@ -402,10 +409,10 @@ export const translations = {
         "Charte InDesign + 9 mockups",
         "3 postes par licence",
         "Mises à jour incluses",
-        "Annulable à tout moment"
+        "Renouvelé chaque année, annulable"
       ],
-      lifeName: "Lifetime",
-      lifePrice: "25 €",
+      lifeName: "À vie",
+      lifePrice: "59 €",
       lifeDesc: "Payez une fois, gardez-le pour toujours",
       lifeFeatures: [
         "Générations illimitées",
@@ -416,10 +423,17 @@ export const translations = {
         "Mises à jour incluses",
         "Un seul paiement, licence à vie"
       ],
+      studioName: "Studio",
+      studioPrice: "149 €",
+      studioDesc: "Une licence à vie pour 10 postes : agences, studios, écoles.",
       ctaFree: "Télécharger",
       ctaPlus: "S'abonner",
       ctaLife: "Prendre la licence à vie",
-      note: "Paiement sécurisé par Lemon Squeezy · Clé de licence envoyée par e-mail · Activation depuis le panneau du plugin"
+      ctaStudio: "Prendre Studio",
+      launch: "Offre de lancement : −25 % avec le code",
+      launchUntil: "jusqu'au",
+      guarantee: "Satisfait ou remboursé 14 jours",
+      note: "Paiement sécurisé par Lemon Squeezy · Clé de licence envoyée par e-mail · Activation depuis le panneau du plugin · Satisfait ou remboursé 14 jours"
     },
     faq: {
       badge: "FAQ",
@@ -437,11 +451,11 @@ export const translations = {
       question5: "Puis-je personnaliser la sortie ?",
       answer5: "Oui : les versions à générer, le cadrage, les traitements couleur (dont la couleur du monochrome, foncé ou clair, et votre propre palette), les formats, les tailles, le nom du dossier parent, et la génération ou non de la charte InDesign.",
       question6: "Y a-t-il un essai gratuit ?",
-      answer6: "Oui. Le plugin est livré avec 3 générations offertes, toutes fonctions activées et sans carte bancaire. Une connexion Internet est nécessaire pour les compter. Ensuite, choisissez l'abonnement mensuel Logotyps+ ou la licence Lifetime.",
+      answer6: "Oui. Le plugin est livré avec 3 générations offertes, toutes fonctions activées et sans carte bancaire. Une connexion Internet est nécessaire pour les compter. Ensuite, choisissez la licence annuelle (39 €/an) ou la licence à vie (59 €, un seul paiement).",
       question7: "Comment installer le plugin ?",
       answer7: "Téléchargez l'installeur macOS (.pkg) ou Windows (.exe) sur logotyps.fr/download, quittez Illustrator, lancez-le, puis rouvrez Illustrator : le panneau est dans Fenêtre › Extensions › Logo Déclinaisons. Ensuite, les nouvelles versions s'installent toutes seules depuis le panneau.",
       question8: "Comment fonctionnent les licences et l'annulation ?",
-      answer8: "Logotyps+ est facturé chaque mois et s'annule à tout moment ; vous gardez l'accès jusqu'à la fin de la période. Lifetime est un paiement unique. Chaque licence fonctionne sur 3 postes au maximum : désactivez-la depuis le panneau pour la déplacer sur une autre machine. Paiements et factures sont gérés par Lemon Squeezy."
+      answer8: "La licence annuelle se renouvelle chaque année et s'annule à tout moment ; vous gardez l'accès jusqu'à la fin de la période. À vie et Studio sont un paiement unique. Chaque licence fonctionne sur 3 postes au maximum (10 pour Studio) : désactivez-la depuis le panneau pour la déplacer sur une autre machine. Pas convaincu ? Remboursement intégral sous 14 jours. Paiements et factures sont gérés par Lemon Squeezy."
     },
     cta: {
       title1: "Prêt à livrer votre",
@@ -450,7 +464,7 @@ export const translations = {
       button: "Télécharger gratuitement",
       feature1: "3 générations offertes",
       feature2: "Sans carte bancaire",
-      feature3: "Licence à vie dès 25 €"
+      feature3: "Licence à vie à 59 €"
     },
     download: {
       badge: "Plugin Illustrator",

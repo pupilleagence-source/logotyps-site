@@ -11,4 +11,12 @@ export const FEATURES_ANCHOR = "#features";
 
 const CHECKOUT = "https://logotyps.lemonsqueezy.com/checkout/buy/31470257-06a8-4239-9d09-a3e119eed69e";
 export const CHECKOUT_LIFETIME = `${CHECKOUT}?enabled=1077127`;
-export const CHECKOUT_MONTHLY = `${CHECKOUT}?enabled=1077121`;
+export const CHECKOUT_ANNUAL = `${CHECKOUT}?enabled=1077121`;
+// Studio : variante à créer dans Lemon Squeezy (149 €, 10 activations). Tant que son
+// identifiant n'est pas renseigné ici, le checkout affiche toutes les variantes.
+export const STUDIO_VARIANT_ID = "";
+export const CHECKOUT_STUDIO = STUDIO_VARIANT_ID ? `${CHECKOUT}?enabled=${STUDIO_VARIANT_ID}` : CHECKOUT;
+
+// Offre de lancement affichée sous les tarifs. `enabled` à passer à true UNIQUEMENT
+// une fois le code créé dans Lemon Squeezy (Discounts), sinon on annonce un code mort.
+export const LAUNCH = { enabled: false, code: "LANCEMENT", until: "2026-10-05" };

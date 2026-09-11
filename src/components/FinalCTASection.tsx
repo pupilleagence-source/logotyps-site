@@ -94,11 +94,11 @@ export function Footer() {
             />
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-white/40 px-4">
-            <a href="#" className="hover:text-white transition-colors">{t.footer.privacy}</a>
-            <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>
-            <a href="#" className="hover:text-white transition-colors">{t.footer.support}</a>
-            <a href="mailto:hello@logotyps.com" className="hover:text-white transition-colors flex items-center gap-2">
-              <Mail className="w-4 h-4" /> hello@logotyps.com
+            <a href="/privacy" className="hover:text-white transition-colors">{t.footer.privacy}</a>
+            <a href="/terms" className="hover:text-white transition-colors">{t.footer.terms}</a>
+            <a href="/#faq" className="hover:text-white transition-colors">{t.footer.support}</a>
+            <a href="mailto:pupille.agence@gmail.com" className="hover:text-white transition-colors flex items-center gap-2">
+              <Mail className="w-4 h-4" /> pupille.agence@gmail.com
             </a>
           </div>
         </div>

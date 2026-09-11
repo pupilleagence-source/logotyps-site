@@ -186,7 +186,7 @@ export const translations = {
       launch: "Launch offer: −25% with code",
       launchUntil: "until",
       guarantee: "14-day money-back guarantee",
-      note: "Secure payment by Lemon Squeezy · License key sent by email · Activate it from the plugin panel · 14-day money-back guarantee"
+      note: "Prices include VAT · Secure payment by Lemon Squeezy · License key sent by email · Activate it from the plugin panel · 14-day money-back guarantee"
     },
     faq: {
       badge: "FAQ",
@@ -447,7 +447,7 @@ export const translations = {
       launch: "Offre de lancement : −25 % avec le code",
       launchUntil: "jusqu'au",
       guarantee: "Satisfait ou remboursé 14 jours",
-      note: "Paiement sécurisé par Lemon Squeezy · Clé de licence envoyée par e-mail · Activation depuis le panneau du plugin · Satisfait ou remboursé 14 jours"
+      note: "Prix TTC · Paiement sécurisé par Lemon Squeezy · Clé de licence envoyée par e-mail · Activation depuis le panneau du plugin · Satisfait ou remboursé 14 jours"
     },
     faq: {
       badge: "FAQ",

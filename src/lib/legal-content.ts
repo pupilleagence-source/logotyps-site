@@ -41,9 +41,11 @@ function publisherLines(lang: Language): string[] {
   const L = LEGAL;
   const fr = lang === "fr";
   const lines: string[] = [];
-  lines.push((fr ? "Éditeur : " : "Publisher: ") + L.publisher + (L.legalForm ? ", " + L.legalForm : "") + (L.country ? ", " + L.country : ""));
+  const form = fr ? L.legalForm.fr : L.legalForm.en;
+  lines.push((fr ? "Éditeur : " : "Publisher: ") + L.publisher + (form ? ", " + form : "") + (L.country ? ", " + L.country : ""));
   if (L.siret) lines.push("SIRET : " + L.siret);
   if (L.address) lines.push((fr ? "Adresse : " : "Address: ") + L.address);
+  if (L.phone) lines.push((fr ? "Téléphone : " : "Phone: ") + L.phone);
   if (L.director) lines.push((fr ? "Directeur de la publication : " : "Publication director: ") + L.director);
   lines.push((fr ? "Contact : " : "Contact: ") + "[" + L.email + "](mailto:" + L.email + ")");
   lines.push((fr ? "Hébergeur du site : " : "Website host: ") + "[" + L.host.name + "](" + L.host.url + "), " + L.host.address);
@@ -75,7 +77,7 @@ export function getLegal(lang: Language): { ui: LegalUi; privacy: LegalDoc; term
           id: "controller",
           title: "1. Qui est responsable du traitement",
           body: [
-            "Le site logotyps.fr, le plugin Logotyps pour Adobe Illustrator et le service de licence qui l'accompagne sont édités par " + L.publisher + (L.legalForm ? " (" + L.legalForm + ")" : "") + ", " + L.country + ". Responsable du traitement au sens du RGPD : " + L.publisher + ", joignable à " + mail + ".",
+            "Le site logotyps.fr, le plugin Logotyps pour Adobe Illustrator et le service de licence qui l'accompagne sont édités par " + L.publisher + (L.legalForm.fr ? " (" + L.legalForm.fr + ")" : "") + ", " + L.country + ". Responsable du traitement au sens du RGPD : " + L.publisher + ", joignable à " + mail + ".",
             "Les paiements sont assurés par Lemon Squeezy, qui agit comme vendeur officiel (merchant of record) et est responsable de ses propres traitements (voir la section 5).",
           ],
         },
@@ -252,7 +254,7 @@ export function getLegal(lang: Language): { ui: LegalUi; privacy: LegalDoc; term
           title: "5. Commande, prix et paiement",
           body: [
             "Les Licences sont vendues par notre partenaire Lemon Squeezy, qui agit comme vendeur officiel (merchant of record) : il encaisse le paiement, établit la facture, collecte la TVA applicable et vous adresse le reçu. Le contrat de vente est conclu avec Lemon Squeezy selon [ses conditions](" + LS_TERMS + ") ; le droit d'utiliser le Plugin vous est concédé par " + L.publisher + " selon les présentes conditions.",
-            "Les prix sont affichés en euros sur le site. Le montant définitif, taxes incluses selon votre pays, est affiché sur la page de paiement avant validation. Le paiement est exigible immédiatement. La clé de licence est affichée dès la fin du paiement et envoyée par e-mail avec le reçu ; elle reste consultable à tout moment sur [app.lemonsqueezy.com/my-orders](" + MY_ORDERS + ").",
+            "Les prix sont affichés en euros, toutes taxes comprises (TTC) : le prix indiqué sur le site est le prix payé, la TVA applicable à votre pays y étant incluse et détaillée sur la page de paiement avant validation. Le paiement est exigible immédiatement. La clé de licence est affichée dès la fin du paiement et envoyée par e-mail avec le reçu ; elle reste consultable à tout moment sur [app.lemonsqueezy.com/my-orders](" + MY_ORDERS + ").",
             "Nous pouvons modifier nos tarifs à tout moment pour les nouvelles commandes. Pour un abonnement annuel en cours, un changement de prix vous est notifié par e-mail avant le renouvellement concerné.",
           ],
         },
@@ -363,7 +365,7 @@ export function getLegal(lang: Language): { ui: LegalUi; privacy: LegalDoc; term
         id: "controller",
         title: "1. Who is responsible",
         body: [
-          "The logotyps.fr website, the Logotyps plugin for Adobe Illustrator and its licensing service are published by " + L.publisher + (L.legalForm ? " (" + L.legalForm + ")" : "") + ", " + L.country + ". Data controller under the GDPR: " + L.publisher + ", reachable at " + mail + ".",
+          "The logotyps.fr website, the Logotyps plugin for Adobe Illustrator and its licensing service are published by " + L.publisher + (L.legalForm.en ? " (" + L.legalForm.en + ")" : "") + ", " + L.country + ". Data controller under the GDPR: " + L.publisher + ", reachable at " + mail + ".",
           "Payments are handled by Lemon Squeezy, which acts as merchant of record and is responsible for its own processing (see section 5).",
         ],
       },
@@ -540,7 +542,7 @@ export function getLegal(lang: Language): { ui: LegalUi; privacy: LegalDoc; term
         title: "5. Ordering, prices and payment",
         body: [
           "Licenses are sold by our partner Lemon Squeezy, acting as merchant of record: it collects the payment, issues the invoice, collects applicable VAT and sends you the receipt. The sales contract is concluded with Lemon Squeezy under [its terms](" + LS_TERMS + "); the right to use the Plugin is granted to you by " + L.publisher + " under these terms.",
-          "Prices are displayed in euros on the website. The final amount, including taxes for your country, is shown on the payment page before you confirm. Payment is due immediately. The license key is displayed as soon as the payment completes and emailed with the receipt; it remains available at any time on [app.lemonsqueezy.com/my-orders](" + MY_ORDERS + ").",
+          "Prices are displayed in euros, all taxes included: the price shown on the website is the price you pay, with the VAT applicable to your country included and itemized on the payment page before you confirm. Payment is due immediately. The license key is displayed as soon as the payment completes and emailed with the receipt; it remains available at any time on [app.lemonsqueezy.com/my-orders](" + MY_ORDERS + ").",
           "We may change our prices at any time for new orders. For an ongoing annual subscription, a price change is notified to you by email before the renewal it applies to.",
         ],
       },

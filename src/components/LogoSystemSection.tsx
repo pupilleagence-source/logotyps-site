@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Check, Folder, FileImage, FileText, BookOpen, RefreshCw, Layers, Download } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { DOWNLOAD_PAGE } from "@/lib/links";
+import { PRICING_ANCHOR } from "@/lib/links";
 
 // Arborescence réellement produite par le plugin (voir CLAUDE.md §5.3 du dépôt du
 // plugin) : <Logopack>/<version>/<couleur>/<FORMAT>/<taille>_<nom>.<ext>
@@ -112,7 +112,7 @@ export function LogoSystemSection() {
 
             <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
               <a
-                href={DOWNLOAD_PAGE}
+                href={PRICING_ANCHOR}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FF6B35] hover:bg-[#FF8F66] text-white font-medium px-7 py-3.5 transition-all duration-200 hover:scale-[1.02] shadow-lg shadow-[#FF6B35]/25 whitespace-nowrap"
               >
                 <Download className="w-4 h-4" />

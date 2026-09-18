@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import { LanguageSelector } from "./LanguageSelector";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { DOWNLOAD_PAGE, FEATURES_ANCHOR } from "@/lib/links";
+import { PRICING_ANCHOR, FEATURES_ANCHOR } from "@/lib/links";
 
 const Chrome3DLogo = dynamic(() => import("./Chrome3DLogo").then(mod => ({ default: mod.Chrome3DLogo })), {
   ssr: false,
@@ -97,7 +97,7 @@ export function HeroSection() {
               {t.nav.faq}
             </a>
             <a
-              href={DOWNLOAD_PAGE}
+              href={PRICING_ANCHOR}
               className="text-sm px-4 py-2 rounded-full bg-[#FF6B35] hover:bg-[#FF6B35]/90 transition-colors cursor-pointer"
             >
               {t.nav.getStarted}
@@ -166,7 +166,7 @@ export function HeroSection() {
           >
             {/* Bouton principal : page de téléchargement */}
             <motion.a
-              href={DOWNLOAD_PAGE}
+              href={PRICING_ANCHOR}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group relative px-8 py-4 bg-[#FF6B35] text-white rounded-full font-medium text-base hover:bg-[#FF8F66] transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 whitespace-nowrap"

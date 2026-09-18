@@ -12,7 +12,7 @@ import { PricingSection } from "@/components/PricingSection";
 import { FAQSection } from "@/components/FAQSection";
 import { FinalCTASection, Footer } from "@/components/FinalCTASection";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { DOWNLOAD_PAGE } from "@/lib/links";
+import { PRICING_ANCHOR } from "@/lib/links";
 import { ArrowRight } from "lucide-react";
 
 export default function Home() {
@@ -55,7 +55,7 @@ export default function Home() {
             className="fixed bottom-8 left-0 right-0 z-50 flex justify-center pointer-events-none"
           >
             <a
-              href={DOWNLOAD_PAGE}
+              href={PRICING_ANCHOR}
               className="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-[#1A1A1A] text-white text-sm font-medium px-6 py-3 shadow-2xl border border-white/10 hover:bg-[#FF6B35] transition-colors duration-200"
             >
               {t.hero.downloadNow} <ArrowRight className="w-4 h-4" />

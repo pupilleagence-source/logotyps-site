@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { DOWNLOAD_PAGE } from "@/lib/links";
+import { PRICING_ANCHOR } from "@/lib/links";
 
 export function FinalCTASection() {
   const ref = useRef(null);
@@ -46,7 +46,7 @@ export function FinalCTASection() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <a
-              href={DOWNLOAD_PAGE}
+              href={PRICING_ANCHOR}
               className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FF6B35] hover:bg-[#FF8F66] text-white text-lg font-medium px-10 py-4 transition-all duration-200 hover:scale-[1.02] shadow-[0_0_40px_rgba(255,107,53,0.35)] whitespace-nowrap"
             >
               {t.cta.button} <ArrowRight className="w-5 h-5" />

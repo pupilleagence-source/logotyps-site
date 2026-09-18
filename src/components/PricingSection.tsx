@@ -25,7 +25,7 @@ export function PricingSection() {
     : "";
 
   return (
-    <section ref={ref} id="pricing" className="py-24 px-4 bg-[#F5F5F3]">
+    <section ref={ref} id="pricing" className="py-24 px-4 bg-[#F5F5F3] scroll-mt-4">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

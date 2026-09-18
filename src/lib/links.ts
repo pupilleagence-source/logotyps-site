@@ -6,6 +6,9 @@
 // Achat : voir CHECKOUT_* ci-dessous.
 export const DOWNLOAD_PAGE = "/download";
 export const FEATURES_ANCHOR = "#features";
+// Grille tarifaire de l'accueil (essai gratuit + 3 licences). Les boutons « Télécharger
+// gratuitement » y mènent : le visiteur choisit son plan, l'essai gratuit renvoie vers /download.
+export const PRICING_ANCHOR = "/#pricing";
 // Portail global Lemon Squeezy : le client retrouve ses commandes et clés avec son e-mail (lien magique).
 export const MY_ORDERS = "https://app.lemonsqueezy.com/my-orders";
 // Portail client de la boutique : gérer, mettre en pause ou annuler l'abonnement annuel,

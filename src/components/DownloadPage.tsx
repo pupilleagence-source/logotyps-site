@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Apple, Monitor, Download, ArrowLeft, CheckCircle2, KeyRound, Copy, Check, Settings2, PlayCircle } from "lucide-react";
 import { LanguageSelector } from "./LanguageSelector";
 import { Footer } from "./FinalCTASection";
+import { PricingRecap } from "./PricingRecap";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { MY_ORDERS, CUSTOMER_PORTAL } from "@/lib/links";
 
@@ -266,6 +267,9 @@ export function DownloadPage() {
               </div>
             ))}
           </motion.div>
+
+          {/* Rappel des tarifs (inutile juste après un achat) */}
+          {!purchase && <PricingRecap />}
 
           {/* Nouveautés */}
           {latest && latest.changelog && latest.changelog.length > 0 && (

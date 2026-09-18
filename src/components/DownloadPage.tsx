@@ -253,6 +253,9 @@ export function DownloadPage() {
             </div>
           </motion.div>
 
+          {/* Rappel des tarifs (inutile juste après un achat) */}
+          {!purchase && <PricingRecap />}
+
           {/* Étapes */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -267,9 +270,6 @@ export function DownloadPage() {
               </div>
             ))}
           </motion.div>
-
-          {/* Rappel des tarifs (inutile juste après un achat) */}
-          {!purchase && <PricingRecap />}
 
           {/* Nouveautés */}
           {latest && latest.changelog && latest.changelog.length > 0 && (

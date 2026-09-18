@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Apple, Monitor, Download, ArrowLeft, CheckCircle2, KeyRound, Copy, Check, Settings2, PlayCircle } from "lucide-react";
+import { Download, ArrowLeft, CheckCircle2, KeyRound, Copy, Check, Settings2, PlayCircle } from "lucide-react";
+import { AppleLogo, WindowsLogo } from "./PlatformLogos";
 import { LanguageSelector } from "./LanguageSelector";
 import { Footer } from "./FinalCTASection";
 import { PricingRecap } from "./PricingRecap";
@@ -68,9 +69,10 @@ export function DownloadPage() {
     try { await navigator.clipboard.writeText(purchase.key); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch (e) {}
   };
 
-  const buttons: { key: Platform; label: string; file: string; Icon: typeof Apple }[] = [
-    { key: "mac", label: u.mac, file: ".pkg", Icon: Apple },
-    { key: "windows", label: u.windows, file: ".exe", Icon: Monitor },
+  // Vrais logos (mêmes tracés que la section d'accueil), pas des pictos génériques.
+  const buttons: { key: Platform; label: string; file: string; Icon: typeof AppleLogo }[] = [
+    { key: "mac", label: u.mac, file: ".pkg", Icon: AppleLogo },
+    { key: "windows", label: u.windows, file: ".exe", Icon: WindowsLogo },
   ];
   // La plateforme détectée passe en premier et en couleur.
   const ordered = platform === "windows" ? [...buttons].reverse() : buttons;
@@ -213,7 +215,7 @@ export function DownloadPage() {
                       : "bg-white text-[#1A1A1A] border border-[#E5E5E3] hover:border-[#1A1A1A]/30"
                   }`}
                 >
-                  <Icon className="w-4 h-4 shrink-0" />
+                  <Icon className={`shrink-0 ${key === "mac" ? "w-[18px] h-[18px] -mt-0.5" : "w-4 h-4"}`} />
                   <span>
                     {u.downloadFor} <strong className="font-semibold">{label}</strong>
                   </span>

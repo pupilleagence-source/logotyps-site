@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Apple, Monitor, Download, ArrowLeft, CheckCircle2, KeyRound, Copy, Check, Settings2 } from "lucide-react";
+import { Apple, Monitor, Download, ArrowLeft, CheckCircle2, KeyRound, Copy, Check, Settings2, PlayCircle } from "lucide-react";
 import { LanguageSelector } from "./LanguageSelector";
 import { Footer } from "./FinalCTASection";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -98,7 +98,7 @@ export function DownloadPage() {
 
       <section className="relative flex-1 px-6 lg:px-11 pt-16 pb-24">
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] pointer-events-none"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] max-w-full h-[600px] pointer-events-none"
           style={{ background: "radial-gradient(ellipse at center, rgba(255, 107, 53, 0.08) 0%, transparent 60%)" }}
         />
 
@@ -222,7 +222,35 @@ export function DownloadPage() {
               );
             })}
           </motion.div>
-          <p className="text-xs text-[#1A1A1A]/40 mb-16">{u.sizeHint}</p>
+          <p className="text-xs text-[#1A1A1A]/40 mb-12">{u.sizeHint}</p>
+
+          {/* Tutoriel vidéo : la piste suit la langue du site (FR / EN). Voix off, donc pas
+              de lecture automatique ; `key` force le rechargement quand la langue change. */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="text-left mb-12"
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <PlayCircle className="w-5 h-5 text-[#FF6B35]" />
+              <h2 className="text-lg font-[400] text-[#1A1A1A]" style={{ fontFamily: "Gelica, sans-serif" }}>{u.videoTitle}</h2>
+            </div>
+            <p className="text-sm text-[#1A1A1A]/60 mb-4">{u.videoHint}</p>
+            <div className="rounded-[16px] overflow-hidden bg-[#1A1A1A] border border-[#E5E5E3] shadow-lg shadow-black/5 aspect-video">
+              <video
+                key={language}
+                className="w-full h-full"
+                controls
+                playsInline
+                preload="metadata"
+                poster={`/video/installation-${language === "fr" ? "fr" : "en"}.jpg`}
+              >
+                <source src={`/video/installation-${language === "fr" ? "fr" : "en"}.mp4`} type="video/mp4" />
+                {u.videoUnsupported}
+              </video>
+            </div>
+          </motion.div>
 
           {/* Étapes */}
           <motion.div

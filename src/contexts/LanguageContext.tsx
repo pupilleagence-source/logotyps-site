@@ -19,6 +19,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const savedLanguage = localStorage.getItem('language') as Language;
     if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'fr')) {
       setLanguageState(savedLanguage);
+    } else if (typeof navigator !== 'undefined' && /^fr\b/i.test(navigator.language || '')) {
+      // Premier passage : un navigateur en français voit le site (et la vidéo) en français.
+      setLanguageState('fr');
     }
   }, []);
 

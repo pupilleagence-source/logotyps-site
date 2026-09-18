@@ -2,13 +2,15 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, PlayCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { VideoLightbox } from "./VideoLightbox";
 
 export function FAQSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [videoOpen, setVideoOpen] = useState(false);
   const { t } = useLanguage();
 
   const faqs = [
@@ -39,6 +41,7 @@ export function FAQSection() {
     {
       question: t.faq.question7,
       answer: t.faq.answer7,
+      video: true, // bouton qui ouvre la vidéo d'installation
     },
     {
       question: t.faq.question8,
@@ -109,6 +112,15 @@ export function FAQSection() {
                         <p className="text-[#737373] leading-relaxed">
                           {faq.answer}
                         </p>
+                        {"video" in faq && faq.video && (
+                          <button
+                            type="button"
+                            onClick={() => setVideoOpen(true)}
+                            className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#1A1A1A] text-white text-sm font-medium px-5 py-2.5 hover:bg-[#FF6B35] transition-colors"
+                          >
+                            <PlayCircle className="w-4 h-4" /> {t.faq.videoButton}
+                          </button>
+                        )}
                       </div>
                     </motion.div>
                   )}
@@ -118,6 +130,7 @@ export function FAQSection() {
           ))}
         </div>
       </div>
+      <VideoLightbox open={videoOpen} onClose={() => setVideoOpen(false)} />
     </section>
   );
 }

@@ -353,13 +353,28 @@ export function LogoVariationsSection() {
                 </div>
               </div>
 
-              {/* PDF iframe */}
-              <div className="flex-1 bg-[#525659]">
+              {/* Desktop : visionneuse PDF du navigateur */}
+              <div className="hidden md:block flex-1 bg-[#525659]">
                 <iframe
                   src="/plugin-demo/presentation-logo.pdf#view=FitH"
                   className="w-full h-full"
                   title="presentation-logo.pdf"
                 />
+              </div>
+              {/* Mobile : les navigateurs mobiles affichent mal un PDF en iframe (page géante,
+                  ou rien sur Android). Les 26 pages sont servies en images, à la largeur de l'écran. */}
+              <div className="md:hidden flex-1 overflow-y-auto overscroll-contain bg-[#525659] p-2 space-y-2">
+                {Array.from({ length: 26 }, (_, i) => (
+                  <img
+                    key={i}
+                    src={`/plugin-demo/presentation-pages/page-${String(i + 1).padStart(2, "0")}.webp`}
+                    alt={`presentation-logo.pdf, page ${i + 1}`}
+                    loading={i < 2 ? "eager" : "lazy"}
+                    width={1200}
+                    height={819}
+                    className="w-full h-auto rounded-md bg-white shadow"
+                  />
+                ))}
               </div>
             </motion.div>
           </motion.div>

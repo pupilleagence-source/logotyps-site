@@ -199,7 +199,7 @@ function Scene({ mousePosition, isSpinning, spinKey }: { mousePosition: { x: num
   );
 }
 
-export function Chrome3DLogo() {
+export function Chrome3DLogo({ className }: { className?: string } = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isSpinning, setIsSpinning] = useState(false);
@@ -242,7 +242,7 @@ export function Chrome3DLogo() {
   return (
     <div
       ref={containerRef}
-      className="w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] cursor-pointer"
+      className={className ?? "w-[280px] h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] cursor-pointer"}
       onClick={handleClick}
     >
       <Canvas

@@ -18,7 +18,7 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative flex flex-col items-center justify-start overflow-hidden bg-[#FAFAF8] px-6 lg:px-11 pt-[100px] pb-[100px] min-h-screen w-full">
+    <section className="hero-fit relative flex flex-col items-center overflow-hidden bg-[#FAFAF8] px-6 lg:px-11 w-full">
       <div className="absolute inset-0 z-0 select-none pointer-events-none">
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -106,13 +106,13 @@ export function HeroSection() {
         </div>
       </nav>
 
-      <div className="relative z-10 flex flex-col items-center max-w-[1200px] w-full mx-auto">
-        <div className="flex flex-col items-center text-center">
+      <div className="relative z-10 flex flex-1 min-h-0 flex-col items-center max-w-[1200px] w-full mx-auto">
+        <div className="flex flex-1 min-h-0 w-full flex-col items-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-[10px] bg-white border border-[#E5E5E3] mb-6"
+            className="hero-gap-md shrink-0 inline-flex items-center gap-2 px-4 py-1.5 rounded-[10px] bg-white border border-[#E5E5E3]"
           >
             <img
               src="/Adobe_Illustrator_logo.png"
@@ -126,7 +126,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-[900px] text-[40px] md:text-[56px] lg:text-[72px] leading-[1.05] tracking-[-0.03em] text-[#1A1A1A] mb-6 font-[400]"
+            className="hero-title hero-gap-md shrink-0 max-w-[900px] leading-[1.05] tracking-[-0.03em] text-[#1A1A1A] font-[400]"
             style={{ fontFamily: 'Gelica, sans-serif' }}
           >
             {t.hero.title}{" "}
@@ -138,7 +138,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-[500px] text-base md:text-lg leading-[1.5] text-[#737373] mb-8"
+            className="hero-subtitle shrink-0 max-w-[520px] leading-[1.5] text-[#737373]"
           >
             {t.hero.subtitle}
           </motion.p>
@@ -147,29 +147,29 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative my-8"
+              className="hero-logo-slot relative flex-1 min-h-0 w-full flex items-center justify-center"
             >
               <div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] pointer-events-none"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] max-w-full max-h-full pointer-events-none"
                 style={{
                   background: "radial-gradient(circle, rgba(255, 107, 53, 0.12) 0%, transparent 60%)",
                 }}
               />
-              <Chrome3DLogo />
+              <Chrome3DLogo className="hero-logo cursor-pointer" />
             </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center gap-4 mb-6"
+            className="hero-gap-md shrink-0 flex flex-wrap justify-center items-center gap-3"
           >
             {/* Bouton principal : page de téléchargement */}
             <motion.a
               href={PRICING_ANCHOR}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-4 bg-[#FF6B35] text-white rounded-full font-medium text-base hover:bg-[#FF8F66] transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 whitespace-nowrap"
+              className="group relative px-6 py-3 sm:px-8 sm:py-3.5 bg-[#FF6B35] text-white rounded-full font-medium text-base hover:bg-[#FF8F66] transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 whitespace-nowrap"
             >
               {t.hero.downloadNow}
               <ArrowRight className="w-5 h-5" />
@@ -180,7 +180,7 @@ export function HeroSection() {
               href={FEATURES_ANCHOR}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white text-[#1A1A1A] rounded-full font-medium text-base border-2 border-[#E5E5E3] hover:border-[#FF6B35] transition-all duration-300 shadow-sm hover:shadow-md whitespace-nowrap"
+              className="hidden sm:block px-6 py-3 sm:px-8 sm:py-3.5 bg-white text-[#1A1A1A] rounded-full font-medium text-base border-2 border-[#E5E5E3] hover:border-[#FF6B35] transition-all duration-300 shadow-sm hover:shadow-md whitespace-nowrap"
             >
               {t.hero.learnMore}
             </motion.a>
@@ -190,7 +190,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col items-center gap-3"
+            className="shrink-0 flex flex-col items-center gap-2"
           >
             <div className="flex items-center gap-3">
               {/* Apple Logo */}
@@ -206,7 +206,7 @@ export function HeroSection() {
                 </svg>
               </div>
             </div>
-            <p className="text-xs text-[#737373]">{t.hero.compatible}</p>
+            <p className="text-xs text-[#737373] px-2">{t.hero.compatible}</p>
           </motion.div>
         </div>
       </div>
@@ -215,7 +215,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="hero-scroll-hint absolute bottom-6 left-1/2 -translate-x-1/2"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

@@ -247,3 +247,13 @@
   .hero-fit { padding-bottom: 96px; }
   .hero-scroll-hint { display: block; }
 }
+
+/* ---- Mobile : échelle typographique homogène (corps 15 px, titres 30 / 19 px) ---- */
+@media (max-width: 639px) {
+  main p:not(.text-xs):not([class*="text-[11px]"]) {
+    font-size: 15px !important;
+    line-height: 1.55 !important;
+  }
+  main h2.text-4xl { font-size: 30px !important; line-height: 1.15 !important; }
+  main h3.text-2xl, main h3.text-xl, main h3.text-lg { font-size: 19px !important; line-height: 1.3 !important; }
+}

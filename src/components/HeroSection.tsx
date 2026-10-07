@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { LanguageSelector } from "./LanguageSelector";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -16,6 +17,7 @@ const Chrome3DLogo = dynamic(() => import("./Chrome3DLogo").then(mod => ({ defau
 
 export function HeroSection() {
   const { t } = useLanguage();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <section className="hero-fit relative flex flex-col items-center overflow-hidden bg-[#FAFAF8] px-6 lg:px-11 w-full">
@@ -77,11 +79,14 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <img
-              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/logotyps-horizontal-resized-1768677535430.webp?width=8000&height=8000&resize=contain"
-              alt="Logotyps"
-              className="h-7"
-            />
+            <a href="/" aria-label="Logotyps">
+              <img src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/logotyps-icon-1768677535568.png?width=160&height=160&resize=contain" alt="Logotyps" className="h-9 w-auto md:hidden" />
+              <img
+                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/project-uploads/logotyps-horizontal-resized-1768677535430.webp?width=8000&height=8000&resize=contain"
+                alt="Logotyps"
+                className="hidden md:block h-7"
+              />
+            </a>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -103,7 +108,48 @@ export function HeroSection() {
               {t.nav.getStarted}
             </a>
           </motion.div>
+
+          {/* Mobile : langue + menu burger */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="md:hidden flex items-center gap-1 pl-1 pr-1 py-1 rounded-full bg-[#1A1A1A] text-white"
+          >
+            <LanguageSelector />
+            <button
+              type="button"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Menu"
+              aria-expanded={menuOpen}
+              className="w-10 h-10 inline-flex items-center justify-center rounded-full hover:bg-white/10 transition-colors"
+            >
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </motion.div>
         </div>
+
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18 }}
+              className="md:hidden mt-3 mx-auto max-w-7xl rounded-2xl bg-[#1A1A1A] text-white p-2 shadow-2xl flex flex-col"
+            >
+              <a href="#pricing" onClick={() => setMenuOpen(false)} className="px-4 py-3 rounded-xl text-[15px] hover:bg-white/10">
+                {t.nav.pricing}
+              </a>
+              <a href="#faq" onClick={() => setMenuOpen(false)} className="px-4 py-3 rounded-xl text-[15px] hover:bg-white/10">
+                {t.nav.faq}
+              </a>
+              <a href={PRICING_ANCHOR} onClick={() => setMenuOpen(false)} className="mt-1 px-4 py-3 rounded-xl text-[15px] font-medium bg-[#FF6B35] text-center">
+                {t.nav.getStarted}
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       <div className="relative z-10 flex flex-1 min-h-0 flex-col items-center max-w-[1200px] w-full mx-auto">

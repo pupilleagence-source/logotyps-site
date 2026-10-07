@@ -229,7 +229,7 @@
   height: 100vh;
   height: 100svh;
   min-height: 540px;
-  padding-top: clamp(68px, 9svh, 100px);
+  padding-top: clamp(80px, 9svh, 100px);
   padding-bottom: clamp(16px, 3svh, 36px);
 }
 .hero-title { font-size: clamp(26px, min(8.5vw, 6.4svh), 72px); }
